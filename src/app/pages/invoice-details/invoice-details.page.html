@@ -1,0 +1,219 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Invoices</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div>
+    <ion-card  mode="ios" class="card-A">
+      <ion-card-content  mode="ios" class="ion-no-padding ion-no-margin">
+        <ion-row class="custom-padding">
+          <ion-col size="5.5" class="col-A">
+            <ion-label>
+              <p>Invoice For</p>
+              <h2>{{invoiceDetail?.name !== null ? (invoiceDetail.name | titlecase) : 'unknown'}}</h2>
+            </ion-label>
+          </ion-col>
+          <ion-col size="1" class="col-B"></ion-col>
+          <ion-col size="5.5" class="col-C">
+            <ion-label>
+              <p>Total Amount</p>
+              <h2>INR {{invoiceDetail?.price !== null ? (invoiceDetail.price) : 'unknown'}}</h2>
+           </ion-label>
+          </ion-col>          
+        </ion-row>
+
+        <ion-row class="custom-padding">
+          <ion-col size="5.5" class="col-A">
+            <ion-label>
+              <p>Project Name</p>
+              <h2>{{invoiceDetail?.project_name !== null ? (invoiceDetail.project_name) : 'unknown'}}</h2>
+            </ion-label>
+          </ion-col>
+          <ion-col size="1" class="col-B"></ion-col>
+          <ion-col size="5.5" class="col-C">
+            <ion-label>
+              <p>Invoice No</p>
+              <h2>{{invoiceDetail?.invoice_no !== null ? (invoiceDetail.invoice_no) : 'unknown'}}</h2>
+           </ion-label>
+          </ion-col>          
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card  mode="ios" class="card-B">
+      <ion-card-content  mode="ios" class="ion-no-padding ion-no-margin">
+        <ion-row class="custom-padding">
+          <ion-col size="12" class="col-A">
+            <ion-label>
+              <p>Invoice Received Date</p>
+              <h3>{{invoiceDetail?.vendor_inv_date !== null ? (invoiceDetail.vendor_inv_date) : 'unknown'}} </h3>
+            </ion-label>
+          </ion-col>        
+        </ion-row>
+        <ion-row class="custom-padding">
+          <ion-col size="12" class="col-A">
+            <ion-label>
+              <p>Invoice: ID</p>
+              <h3>{{invoiceDetail?.invoice_no !== null ? (invoiceDetail.invoice_no) : 'unknown'}} </h3>
+            </ion-label>
+          </ion-col>         
+        </ion-row>
+        <!-- <ion-row class="custom-padding">
+          <ion-col size="12" class="col-A">
+            <ion-label>
+              <p>% of Gross Amount received</p>
+              <h3>{{invoiceDetail?.gross_amount !== null ? (invoiceDetail.gross_amount) : '0.00'}} </h3>
+            </ion-label>
+          </ion-col>         
+        </ion-row> -->
+        <ion-row class="custom-padding">
+          <ion-col size="12" class="col-A">
+            <ion-label>
+              <p>Brand Name</p>
+              <h3>{{invoiceDetail?.brand_name !== null ? (invoiceDetail.brand_name) : 'unknown'}}</h3>
+            </ion-label>
+          </ion-col>         
+        </ion-row>
+        <ion-row class="custom-padding">
+          <ion-col size="12" class="col-A">
+            <ion-label>
+              <p>Agreement Value</p>
+              <h3>{{invoiceDetail?.agreement_value !== null ? (invoiceDetail.agreement_value) : 'unknown'}}</h3>
+            </ion-label>
+          </ion-col>         
+        </ion-row>
+
+        <!-- <ion-row class="custom-padding">
+          <ion-col size="12" class="col-A">
+            <ion-label>
+              <p>Agreement Value as per SF</p>
+              <h3>{{invoiceDetail?.agreement_value_sf !== null ? (invoiceDetail.agreement_value_sf) : 'unknown'}}</h3>
+            </ion-label>
+          </ion-col>         
+        </ion-row> -->
+
+        <!-- <ion-row class="custom-padding">
+          <ion-col size="12" class="col-A">
+            <ion-label>
+              <p>Booking date</p>
+              <h3>{{invoiceDetail?.booking_date !== null ? (invoiceDetail.booking_date) : 'unknown'}}</h3>
+            </ion-label>
+          </ion-col>         
+        </ion-row>
+        <ion-row class="custom-padding">
+          <ion-col size="12" class="col-A">
+            <ion-label>
+              <p>Brokerage %</p>
+              <h3>{{invoiceDetail?.brokerage !== null ? (invoiceDetail.brokerage) : 'unknown'}}</h3>
+            </ion-label>
+          </ion-col>         
+        </ion-row>
+        <ion-row class="custom-padding">
+          <ion-col size="12" class="col-A">
+            <ion-label>
+              <p>Brokerage Amount</p>
+              <h3>{{invoiceDetail?.brokerage_amt !== null ? (invoiceDetail.brokerage_amt) : 'unknown'}}</h3>
+            </ion-label>
+          </ion-col>         
+        </ion-row> -->
+        <!-- <ion-row class="custom-padding">
+          <ion-col size="12" class="col-A">
+            <ion-label>
+              <p>Channel Partner Name</p>
+              <h3>{{invoiceDetail?.partner_name !== null ? (invoiceDetail.partner_name) : 'unknown'}}</h3>
+            </ion-label>
+          </ion-col>         
+        </ion-row> -->
+        <ion-row class="custom-padding">
+          <ion-col size="12" class="col-A">
+            <ion-label>
+              <p>City</p>
+              <h3>{{invoiceDetail?.city !== null ? (invoiceDetail.city) : 'unknown'}}</h3>
+            </ion-label>
+          </ion-col>         
+        </ion-row>
+        <ion-row class="custom-padding">
+          <ion-col size="12" class="col-A">
+            <ion-label>
+              <p>CP Name</p>
+              <h3>{{invoiceDetail?.name !== null ? (invoiceDetail.name) : 'unknown'}}</h3>
+            </ion-label>
+          </ion-col>         
+        </ion-row>
+        <!-- <ion-row class="custom-padding">
+          <ion-col size="12" class="col-A">
+            <ion-label>
+              <p>Invoice Date</p>
+              <h3>{{invoiceDetail?.invoice_date !== null ? (invoiceDetail.invoice_date) : 'unknown'}}</h3>
+            </ion-label>
+          </ion-col>         
+        </ion-row> -->
+        <ion-row class="custom-padding">
+          <ion-col size="12" class="col-A">
+            <ion-label>
+              <p>Partner Name</p>
+              <h3>{{invoiceDetail?.partner_name !== null ? (invoiceDetail.partner_name) : 'unknown'}}</h3>
+            </ion-label>
+          </ion-col>         
+        </ion-row>
+        <!-- <ion-row class="custom-padding">
+          <ion-col size="12" class="col-A">
+            <ion-label>
+              <p>Paid</p>
+              <h3>{{invoiceDetail?.paid !== null ? (invoiceDetail.paid) : 'unknown'}}</h3>
+            </ion-label>
+          </ion-col>         
+        </ion-row> -->
+        <ion-row class="custom-padding">
+          <ion-col size="12" class="col-A">
+            <ion-label>
+              <p>Project Name</p>
+              <h3>{{invoiceDetail?.project_name !== null ? (invoiceDetail.project_name) : 'unknown'}}</h3>
+            </ion-label>
+          </ion-col>         
+        </ion-row>
+        <ion-row class="custom-padding">
+          <ion-col size="12" class="col-A">
+            <ion-label>
+              <p>Salesforce Id.</p>
+              <h3>{{invoiceDetail?.salesforce_id !== null ? (invoiceDetail.salesforce_id) : 'unknown'}}</h3>
+            </ion-label>
+          </ion-col>         
+        </ion-row>
+        <!-- <ion-row class="custom-padding">
+          <ion-col size="12" class="col-A">
+            <ion-label>
+              <p>Reference Number</p>
+              <h3>{{invoiceDetail?.reference_no !== null ? (invoiceDetail.reference_no) : 'unknown'}}</h3>
+            </ion-label>
+          </ion-col>         
+        </ion-row> -->
+        <!-- <ion-row class="custom-padding">
+          <ion-col size="12" class="col-A">
+            <ion-label>
+              <p>Remarks</p>
+              <h3>{{invoiceDetail?.remarks !== null ? (invoiceDetail.remarks) : 'unknown'}}</h3>
+            </ion-label>
+          </ion-col>         
+        </ion-row> -->
+        <ion-row class="custom-padding">
+          <ion-col size="12" class="col-A">
+            <ion-label>
+              <p>Total Amount incl GST</p>
+              <h3>{{invoiceDetail?.price !== null ? (invoiceDetail.price) : 'unknown'}}</h3>
+            </ion-label>
+          </ion-col>         
+        </ion-row>
+
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+</ion-content>

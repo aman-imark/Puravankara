@@ -1,0 +1,84 @@
+<ion-header class="ion-border">
+  <ion-toolbar>
+    <ion-title>Controlled Inventory</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+
+  <div class="ion-padding" *ngIf="cityData?.details">
+    <ion-label>
+      <p>{{cityData?.details}}</p>
+    </ion-label>
+  </div>
+
+
+
+  <div *ngIf="projectsData?.length === 0" style="width: 100%;text-align: center;position: absolute;top: 50%;left:50%;transform: translate(-50%, -50%);">
+      <p style="color: #666 !important;" class="ion-text-center">No Data Available</p>
+  </div>
+
+
+
+  <div *ngIf="projectsData?.length >= 1">
+  <ion-card *ngFor="let pjd of projectsData" mode="ios" class="card-A">
+    <ion-card-content  mode="ios" class="ion-no-padding ion-no-margin">
+      <div [ngStyle]="{'background-image':'URL('+pjd.flat_image+')'}" style="height:170px;
+            background-position: center;background-repeat: no-repeat;background-size: cover;background-color: #d3d3d3;"></div>
+      
+      <ion-list id="main">
+      <ion-item lines="none">
+        <ion-label>
+          <h2>{{pjd.name || 'unknown'}}</h2>
+          <p style="display: flex; align-items: center;margin-top:5px;"><ion-icon name="location-sharp"></ion-icon>
+            &nbsp;{{pjd.address || 'unknown'}}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-thumbnail slot="start">
+          <img src="assets/fA.png"/>
+        </ion-thumbnail>
+        <ion-label>
+           <p>Residential Apartments</p>
+           <h3>{{pjd.residential_apartments}}</h3>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-thumbnail slot="start">
+          <img src="assets/fB.png"/>
+        </ion-thumbnail>
+        <ion-label>
+           <p>Unit</p>
+           <h3>{{pjd.unit}}</h3>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-thumbnail slot="start">
+          <img src="assets/fC.png">
+        </ion-thumbnail>
+        <ion-label>
+           <p>Price</p>
+           <h3>{{pjd.price}}</h3>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-thumbnail slot="start">
+          <img src="assets/fD.png">
+        </ion-thumbnail>
+        <ion-label>
+           <p>Status</p>
+           <h3>{{pjd.status}}</h3>
+        </ion-label>
+      </ion-item>
+      </ion-list>
+      <div class="ion-padding">
+        <ion-button style="height:40px;font-size: 14px;font-weight:600 !important;--border-radius: 12px;" (click)="goto_residentialFlats(pjd.id)">View Project</ion-button>
+      </div> 
+    </ion-card-content>
+  </ion-card>
+  </div>
+
+</ion-content>

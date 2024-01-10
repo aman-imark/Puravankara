@@ -1,0 +1,144 @@
+
+<ion-content [fullscreen]="true">
+  <ion-header class="ion-no-border">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button text="" defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="ion-text-start">Add Member</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+
+
+
+  <div class="ion-padding-horizontal">
+  <form [formGroup]="memberForm" (ngSubmit)="addMemberData()">
+
+    <ion-item mode="md" class="item-custom">
+      <ion-label position="floating"><ion-text style="color:#979797;">Name</ion-text>
+        <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+      <ion-input mode="md" class="input-custom" type="text" formControlName="contact_person_name" name="contact_person_name" required></ion-input>
+    </ion-item>
+    <br>
+
+
+
+    <ion-item mode="md" class="item-custom">
+      <ion-label position="floating"><ion-text style="color:#979797;">Email Address</ion-text>
+        <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+      <ion-input mode="md" class="input-custom" type="email" formControlName="email" name="email" required></ion-input>
+    </ion-item>
+    <br>
+
+
+    <ion-item mode="md" class="item-custom">
+      <ion-label position="floating"><ion-text style="color:#979797;">Phone No</ion-text>
+        <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+      <ion-input mode="md" class="input-custom" type="tel" formControlName="contact_no" name="contact_no" required></ion-input>
+    </ion-item>
+    <br>
+
+
+    <ion-item mode="md" class="item-custom">
+      <ion-select placeholder="City"  formControlName="city" name="city" required style="width:100%;">
+        <ion-select-option *ngFor="let cty of cityData" [value]="cty.id">{{cty.city_name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <br>
+
+
+    <ion-item mode="md" class="item-custom">
+      <ion-label position="floating"><ion-text style="color:#979797;">Address</ion-text>
+        <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+      <ion-input mode="md" class="input-custom" type="text" formControlName="address" name="address" required></ion-input>
+    </ion-item>
+    <br>
+
+
+
+    <ion-item mode="md" class="item-custom">
+      <ion-label position="floating"><ion-text style="color:#979797;">PAN Number</ion-text>
+        <ion-text style="color:#EF2727;">*</ion-text> </ion-label>
+      <ion-input mode="md" class="input-custom" type="text" formControlName="pan_number" name="pan_number" required maxlength="12"></ion-input>
+    </ion-item>
+    <br>
+
+
+
+    <ion-item mode="md" class="item-custom">
+      <ion-label position="floating"><ion-text style="color:#979797;">RERA No</ion-text>
+        <ion-text style="color:#EF2727;">*</ion-text> </ion-label>
+      <ion-input mode="md" class="input-custom" type="text" formControlName="rera_no" name="rera_no" required></ion-input>
+    </ion-item>
+    <div><ion-text style="font-size: 10px;color:#979797;">Sample: PRM/KA/RERA/1251/446/AG/171201/001619</ion-text></div>
+    <br>
+
+
+
+    <ion-item mode="md" class="item-custom">
+      <ion-label position="floating"><ion-text style="color:#979797;">GST No</ion-text></ion-label>
+      <ion-input mode="md" class="input-custom"  type="text" name="gst_number" 
+                   formControlName="gst_number" maxlength="16"></ion-input>
+    </ion-item>
+    <div><ion-text style="font-size: 10px;color:#979797;">Sample: 04AABCU9603R1ZV</ion-text></div>
+    <br>
+
+
+
+
+    <ion-item mode="md" class="item-custom">
+        <ion-select placeholder="Select Region"  formControlName="region_name" name="region_name" required style="width:100%;">
+          <ion-select-option *ngFor="let std of stateData" [value]="std.id">{{std.name}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <br>
+
+
+    <ion-item mode="md" class="item-custom">
+      <ion-label position="floating"><ion-text style="color:#979797;">Vendor Id</ion-text></ion-label>
+      <ion-input mode="md" class="input-custom" type="text" formControlName="vendor_id" name="vendor_id" maxlength="20"></ion-input>
+    </ion-item>
+    <br>
+
+
+
+    <!-- <ion-item mode="md" class="item-custom">
+      <ion-label position="floating"><ion-text style="color:#979797;">Alternate Number</ion-text>
+      </ion-label>
+      <ion-input mode="md" class="input-custom" type="tel" formControlName="alternate_number" name="alternate_number"></ion-input>
+    </ion-item>
+    <br> -->
+
+
+    <!-- <ion-item mode="md" class="item-custom">
+      <ion-select placeholder="City"  formControlName="city" name="city" required style="width:100%;">
+        <ion-select-option *ngFor="let cty of cityData" [value]="cty.id">{{cty.city_name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <br> -->
+    
+
+    <!-- <ion-item button mode="md" class="item-custom" (click)="dateModalBirth()">
+      <ion-label><ion-text style="color:#979797;">Date of Birth</ion-text>&nbsp;&nbsp;</ion-label>
+      <ion-input mode="md" class="input-custom" readonly="true" type="text" name="date_of_birth" formControlName="date_of_birth"></ion-input> 
+      <div style="width:auto;display:flex;align-items: center;">
+        <ion-buttons>
+          <ion-button color="primary">
+            <ion-icon slot="icon-only" name="calendar-number-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </div>    
+    </ion-item>
+    <br> -->
+
+    <br> <br>
+    <div class="ion-padding-top ion-padding-bottom">
+      <ion-button type="submit" size="large" expand="block" style="--border-radius: 15px;">Add</ion-button>
+    </div>
+    <br> <br> 
+  </form>
+  </div>
+
+</ion-content>

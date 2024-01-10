@@ -1,0 +1,98 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Invoices</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button color="primary" (click)="invoiceFilterModal()">
+        <ion-icon name="options-outline"></ion-icon>&nbsp;<ion-text color="dark" style="letter-spacing: 0;font-weight: 500;">Filter</ion-text>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div *ngIf="invoiceData?.length === 0" style="position: absolute;top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <p style="opacity: 0.5;">No Data Found!</p>
+  </div>
+
+  <div *ngIf="filterSet === true" class="ion-padding-horizontal ion-padding-bottom filter-chip">
+        <ion-chip *ngIf="filterTagData?.Status_Name" id="Status_Name">
+          <ion-label style="font-weight:600;">{{filterTagData?.Status_Name}}</ion-label>
+          <ion-icon name="close-sharp" (click)="removeFilterElement('Status_Name')"></ion-icon>
+        </ion-chip>
+  </div>
+
+
+  <!-- <ion-grid *ngIf="invoiceData?.length >= 1" class="ion-no-padding">
+    <ion-row *ngFor="let inv of invoiceData; let i = index;  let even = even; let odd = odd"  id="{{i+1}}"  [ngClass]="{ 'odd-bg': odd, 'even-bg': even }" class="custom-padding">
+      <ion-col size="1.5" class="col-A">{{i+1}}.</ion-col>
+      <ion-col size="4.4" class="col-B">
+          <ion-label>
+            <p>Invoice No.</p>
+            <h3>{{inv.invoice_id !== null ? inv.invoice_id : 'unknown'}}</h3>
+          </ion-label>
+          <p></p>
+          <ion-label>
+            <p>Amount</p>
+            <h3>INR {{inv.price !== null ? inv.price : '0.00'}}</h3>
+          </ion-label>
+      </ion-col>
+      <ion-col size="4.4" class="col-C">
+        <ion-label>
+          <p>Customer Name</p>
+          <h3>{{inv.name !== null ? (inv.name | titlecase) : 'unknown'}}</h3>
+        </ion-label>
+        <p></p>
+        <ion-label>
+          <p>Status</p>
+          <h3>{{inv.status !== null ? (inv.status | titlecase) : 'unknown'}}</h3>
+        </ion-label>
+      </ion-col>
+      <ion-col size="1.7" class="col-D">
+        <ion-buttons>
+          <ion-button fill="solid" class="view-btn" (click)="goto_InvoiceDetails(inv.id)">View</ion-button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+
+  <ion-grid id="invoice_grid" *ngIf="invoiceData?.length >= 1" class="ion-no-padding">
+    <ion-row *ngFor="let inv of invoiceData; let i = index;  let even = even; let odd = odd"  id="{{i+1}}"  [ngClass]="{ 'odd-bg': odd, 'even-bg': even }" class="custom-padding">
+      <ion-col size="1.5" class="col-A">{{i+1}}.</ion-col>
+      <ion-col size="4.4" class="col-B">
+          <ion-label>
+            <p>Booking Id</p>
+            <h3>{{inv.booking_id !== null ? inv.booking_id : 'unknown'}}</h3>
+          </ion-label>
+          <p></p>
+          <ion-label>
+            <p>Amount</p>
+            <h3>INR {{inv.amount_paid !== null ? inv.amount_paid : '0.00'}}</h3>
+          </ion-label>
+      </ion-col>
+      <ion-col size="4.4" class="col-C">
+        <ion-label>
+          <p>Vendor Name</p>
+          <h3>{{inv.vendor_name !== null ? (inv.vendor_name | titlecase) : 'unknown'}}</h3>
+        </ion-label>
+        <p></p>
+        <ion-label>
+          <p>Status</p>
+          <h3>{{inv.status !== null ? (inv.status | titlecase) : 'unknown'}}</h3>
+        </ion-label>
+      </ion-col>
+      <ion-col size="1.7" class="col-D">
+        <ion-buttons>
+          <ion-button fill="solid" class="view-btn" (click)="goto_InvoiceDetails(inv.id)">View</ion-button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

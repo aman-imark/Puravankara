@@ -1,0 +1,41 @@
+<ion-content>
+  <ion-header class="ion-no-border">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button color="dark" (click)="dismiss()">
+           <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>Invoice Filter</ion-title>
+
+      <ion-buttons slot="end">
+        <ion-button>
+          <ion-text color="dark" style="letter-spacing: 0;font-weight: 600;" (click)="clearFilter()">Clear Filter</ion-text>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+
+
+  <div class="ion-padding custom-radio">
+       <ion-radio-group name="userList" (ionChange)="invoiceRadio($event)"  [allowEmptySelection]="true" [(ngModel)]="setInvoiceValue">
+         <h3 class="ion-padding-horizontal">Status</h3>
+          <ion-item lines="none" color="none" class="ion-no-padding">
+             <ion-label class="ion-padding-start">Paid</ion-label>
+             <ion-radio value="1/Paid" class="ion-no-margin" color="primary"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" color="none" class="ion-no-padding">
+             <ion-label class="ion-padding-start">Pending</ion-label>
+             <ion-radio value="2/Pending" class="ion-no-margin" color="primary"></ion-radio>
+          </ion-item>
+       </ion-radio-group>
+  </div>
+
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="ion-padding-horizontal ion-padding-bottom">
+    <ion-button  type="submit" size="large" expand="block" style="--border-radius: 15px;" (click)="applyFilter()">Apply</ion-button>
+   </div> 
+</ion-footer>

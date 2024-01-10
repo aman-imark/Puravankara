@@ -1,0 +1,206 @@
+<ion-header class="ion-border">
+  <ion-toolbar>
+    <ion-title>Dashboard</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="primary" [routerLink]="['/notifications']">
+        <ion-icon slot="icon-only" name="notifications"></ion-icon>
+      </ion-button> &nbsp;
+      <ion-menu-button color="primary" name="close"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content [fullscreen]="true">
+
+  <div class="ion-padding">
+    <ion-slides *ngIf="slider" pager="true" [options]="slideOpts">
+      <ion-slide *ngFor="let sld of slider">
+        <div class="wraper-slider">
+          <div class="wraper-slider-two" [ngStyle]="{background: 'url('+sld.image+')'}">
+               <!-- <div class="slider-text"><ion-text>{{sld.heading}}</ion-text></div> -->
+          </div>
+        </div>
+      </ion-slide>  
+    </ion-slides>
+
+    <div *ngIf="!slider" style="height: 220px;border-radius: 20px;">
+      <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+    </div>
+  </div>
+
+
+  <div *ngIf="userRole == '1' || userRole == '3'" class="ion-text-center ion-margin-bottom">
+    <h3 class="ion-margin-bottom">Leads - {{today | date: 'MMMM, Y'}}</h3>
+    <div *ngIf="userRole == '3'" class="ion-margin-top ion-margin-bottom" style="width: 40%;margin: auto;border: 1pt solid#E1E1E1;border-radius:10px;">
+      <ion-select class="custom-select" mode="ios" value="{{location}}"  [interfaceOptions]="custom-select" interface="popover" (ionChange)="handleChange($event)">
+        <ion-select-option mode="ios" *ngFor="let cty of cityData"  value="{{cty.id}}">{{cty.city_name}}</ion-select-option>
+      </ion-select>
+    </div> 
+  </div>
+
+
+  <!-- <ion-button (click)="downloadThis()">Test Download</ion-button> -->
+  
+  <div *ngIf="userRole == '1' || userRole == '3'" class="ion-padding-bottom">
+    <div id="chart">
+    <apx-chart id="chart"
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [colors]="chartOptions.colors"  
+      [responsive]="chartOptions.responsive"
+      [dataLabels]="chartOptions.dataLabels"
+      [fill]="chartOptions.fill">
+    </apx-chart>
+    </div>
+
+    <div *ngIf="!chartOptions" style="height: 17em;width: 17em;margin: auto;border-radius: 100%;">
+      <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+    </div>
+
+    <ion-list  *ngIf="userRole == '1' || userRole == '3'"  class="list-slot" style="margin: 0px 2px;">
+    <ion-item lines="none" style="--min-height: 32px;">
+      <div slot="start" style="display:inline-flex;align-items:center;margin-inline-start: 0px;margin-inline-end: 0px;">
+        <div class="div-wrap-a" style="background-color: #8F5EE5;"></div>&nbsp;
+        <div class="div-wrap-b">Warm Lead</div>
+      </div>
+      <div slot="end"  style="display:inline-flex;align-items:center;margin-inline-start: 0px;margin-inline-end: 0px;">
+        <div class="div-wrap-a" style="background-color: #F1C338;"></div>&nbsp;
+        <div class="div-wrap-b">Commercial Discussion</div>
+      </div>
+    </ion-item>
+    <ion-item lines="none" style="--min-height: 32px;">
+      <div slot="start" style="display:inline-flex;align-items:center;margin-inline-start: 0px;margin-inline-end: 0px;">
+        <div class="div-wrap-a" style="background-color: #044584;"></div>&nbsp;
+        <div class="div-wrap-b">Site Visit Conducted</div>
+      </div>
+      <div slot="end"  style="display:inline-flex;align-items:center;margin-inline-start: 0px;margin-inline-end: 0px;">
+        <div class="div-wrap-a" style="background-color: #EC343B;"></div>&nbsp;
+        <div class="div-wrap-b">Expired Lead</div>
+      </div>
+    </ion-item>
+    </ion-list>
+
+  </div>
+
+
+
+  <div>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card mode="ios" [routerLink]="['/lead-list']">
+          <ion-card-content>
+            <div style="height:50px;"><img src="assets/1.png" style="height:100%;"></div>
+            <div class="ion-padding-top"><ion-text>Leads Registered</ion-text></div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card mode="ios" [routerLink]="['/add-lead']">
+          <ion-card-content>
+            <div style="height:50px;"><img src="assets/2.png" style="height:100%;"></div>
+            <div class="ion-padding-top"><ion-text>Add Lead</ion-text></div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card mode="ios" [routerLink]="['/booking-list']">
+          <ion-card-content>
+            <div style="height:50px;"><img src="assets/3.png" style="height:100%;"></div>
+            <div class="ion-padding-top"><ion-text>Total Bookings</ion-text></div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card mode="ios" [routerLink]="['/invoices']">
+          <ion-card-content>
+            <div style="height:50px;"><img src="assets/4.png" style="height:100%;"></div>
+            <div class="ion-padding-top"><ion-text>Total Invoices</ion-text></div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+
+      <ion-col size="6">
+        <ion-card mode="ios" [routerLink]="['/explore-residential']">
+          <ion-card-content>
+            <div style="height:50px;"><img src="assets/5.png" style="height:100%;"></div>
+            <div class="ion-padding-top"><ion-text>Our Projects</ion-text></div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6" *ngIf="userRole == '1' || userRole == '3'">
+        <ion-card mode="ios"  [routerLink]="['/revenue-generated']">
+          <ion-card-content>
+            <div style="height:50px;"><img src="assets/6.png" style="height:100%;"></div>
+            <div class="ion-padding-top"><ion-text>Revenue Generated</ion-text></div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6"  *ngIf="userRole == '1' || userRole == '3'">
+        <ion-card mode="ios" [routerLink]="['/members-list']">
+          <ion-card-content>
+            <div style="height:50px;"><img src="assets/7.png" style="height:100%;"></div>
+            <div class="ion-padding-top"><ion-text>Members</ion-text></div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" *ngIf="userRole == '1' || userRole == '3'">
+        <ion-card mode="ios" [routerLink]="['/add-members']">
+          <ion-card-content>
+            <div style="height:50px;"><img src="assets/8.png" style="height:100%;"></div>
+            <div class="ion-padding-top"><ion-text>Add Members</ion-text></div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" *ngIf="userRole == '1' || userRole == '3'">
+        <ion-card mode="ios" [routerLink]="['/expired-leads']">
+          <ion-card-content>
+            <div style="height:50px;"><img src="assets/9.png" style="height:100%;"></div>
+            <div class="ion-padding-top"><ion-text>Expired Leads</ion-text></div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+
+      <ion-col size="6" *ngIf="userRole == '1' || userRole == '3'">
+        <ion-card mode="ios" [routerLink]="['/regions']">
+          <ion-card-content>
+            <div style="height:50px;"><img src="assets/10.png" style="height:100%;"></div>
+            <div class="ion-padding-top"><ion-text>Regions</ion-text></div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" *ngIf="userRole == '1' || userRole == '3'">
+        <ion-card mode="ios" [routerLink]="['/add-region']">
+          <ion-card-content>
+            <div style="height:50px;"><img src="assets/11.png" style="height:100%;"></div>
+            <div class="ion-padding-top"><ion-text>Add Region</ion-text></div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+
+      
+      <ion-col size="6" *ngIf="userRole == '1' || userRole == '2'">
+        <ion-card mode="ios" [routerLink]="['/site-visit']">
+          <ion-card-content>
+            <div style="height:50px;"><img src="assets/12.png" style="height:100%;"></div>
+            <div class="ion-padding-top"><ion-text>Site Visit</ion-text></div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card mode="ios" [routerLink]="['/cab-booking-list']">
+          <ion-card-content>
+            <div style="height:50px;"><img src="assets/12.png" style="height:100%;"></div>
+            <div class="ion-padding-top"><ion-text>View Cab</ion-text></div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>

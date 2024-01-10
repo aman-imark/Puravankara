@@ -1,0 +1,523 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+@import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
+
+
+@font-face {   
+    font-family: 'Poppins';
+    font-style: 300;
+    font-weight: 300;
+    src: url('./assets/fonts/Poppins/Poppins-Regular.otf');
+}
+  
+@font-face {   
+    font-family: 'Poppins';
+    font-weight: 500;
+    src: url('./assets/fonts/Poppins/Poppins-Medium.otf');
+}
+  
+  
+@font-face {   
+    font-family: 'Poppins';
+    font-weight: 600;
+    src: url('./assets/fonts/Poppins/Poppins-SemiBold.otf');
+}
+
+@font-face {   
+    font-family: 'Poppins';
+    font-weight: 800;
+    src: url('./assets/fonts/Poppins/Poppins-Bold.otf');
+}
+  
+
+
+/* Set variables for all modes */
+:root {
+    --ion-font-family: 'Poppins';
+}  
+
+
+
+ion-header{
+    ion-toolbar{
+        ion-back-button{
+            color: black;
+            --color: black;
+        }
+        ion-title{
+            color: #333;
+            font-weight:600;
+        }
+        ion-item{
+            --background:transparent;
+        }
+    }
+}
+
+
+ion-content {
+    ion-grid {
+        width: 100%;
+      ion-row{
+          align-items: center;
+          width:100%;
+      }
+    }
+  
+    ion-button {
+      font-weight:300 !important;
+      text-transform: capitalize;
+    }
+
+    ion-row {
+        .col-A {
+            font-size: 14px !important;
+            color: #333;
+            font-weight:600;
+        }
+        .col-C {
+            ion-label {
+                h3 {
+                    font-size: 14px !important;
+                    color: #333;
+                }
+            }
+        }
+    }
+    
+    ion-chip {
+        --background: transparent;
+        --color: transparent;
+        margin: 0px;
+        min-height: 42px;
+    
+        ion-avatar {
+            height: 2.8em;
+            width: 2.8em;
+        }
+    
+        ion-label {
+            h3 {
+                font-size: 14px !important;
+                color: #333;
+            }
+        }
+    }
+        
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #333 !important;
+    font-weight:600;
+}
+
+h1{
+    font-size: 20px;
+}
+
+ion-label{
+    p{
+        font-size:13px !important;
+    }
+}
+
+ion-card-content{
+    h1{
+        font-size: 20px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+
+ion-modal.lead-message {
+      --height: 23%;
+      --width: 85%;
+      margin:auto;
+      --border-radius: 16px;
+      --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+ion-modal.center-modals {
+      --height: auto;
+      --width: 85%;
+      margin:auto;
+      --border-radius: 16px;
+      --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      ion-content{
+          --height:auto;
+      }
+}
+
+
+
+// input filed class
+  .item-custom{
+      --padding-start: 0px;
+      --inner-padding-end: 0px;
+  }
+  .label-p-custom{
+      font-size: 16px;
+      font-weight: 500;
+      color: #979797
+  }
+  .input-custom{
+     --padding-start: 0px;
+     --padding-end: 0px;
+     color:#000000;
+     font-size: 14px;
+  }
+  a{
+      text-decoration: none;
+  }
+  .border-space{
+      border-bottom: 1.4px solid #d3d3d3;
+      width: 96%; margin: 15px auto 40px;
+  }
+  
+  .item-label-floating .sc-ion-input-md-h {
+    --padding-top: 0px;
+    --padding-bottom: 0px;
+    --padding-start: 0px;
+  }
+  
+
+
+  .iobtn-medium{
+      height:45px;
+      --height:45px;
+      font-size:14px;
+  }
+  
+  
+  .otp-input{
+      .native-input{
+          height:100% !important;
+      }
+  }
+  
+  
+
+
+
+
+  
+  .h-f-w{
+      h3{
+          font-weight:600;
+      }
+      p{
+          padding:4px 0px;
+      }
+  }
+  
+  .icon-text-label{
+      display: flex;
+      align-items: center;
+      padding: 6px 0px;
+      h3{
+          font-weight: 600;
+      }
+  }
+  
+  .icon-text-label2{
+      display: flex;
+      align-items: center;
+      h3{
+          font-weight: 600;
+      }
+  }
+  
+  
+  
+  .custom-padding {
+      padding: 14px 12px;
+  }
+  .odd-bg{
+      --background:#fff;
+      background:#fff;
+  }
+  .even-bg{
+      --background:#F6F6F6;
+      background:#F6F6F6;
+  }
+  .view-btn{
+      --background:#044584!important; --color:#fff!important;
+      --border-radius: 8px!important; font-weight: 600!important;
+      font-size: 10px!important; height: 26px!important; width: 100%!important;
+  }
+  .book-btn{
+    --background:#044584!important; --color:#fff!important;
+    --border-radius: 8px!important; font-weight: 600!important;
+    font-size: 10px!important; height: 26px!important; width: 100%!important;
+  }
+  
+  .lead-p-msg{
+    font-size: 10px !important;
+    display: inline;
+    background: #EBFEDB !important;
+    color: #39910E !important;
+    border-radius: 4px;
+    padding: 2.5px 8px;
+  }
+  
+
+  .text-danger{
+    color: #EF2727;
+    font-size:12px;
+    font-weight:500;
+    padding: 0px 0px 2px;
+  }
+
+
+  .lead-p{
+    font-size:10px !important; display: inline;
+    border-radius:4px; padding: 2.5px 8px;
+  }
+  .warm-color{
+     background: #EBFEDB !important;
+     color: #39910E !important;
+  }
+  .commersial-color{
+     background: #EBFEDB !important;
+     color: #39910E !important;
+  }
+  .site-visit-color{
+     background: #EBFEDB !important;
+     color: #39910E !important;
+  }
+  .expired-color{
+     background: #F9EAEA !important;
+     color: #F12626 !important;
+  }
+
+
+
+  .custom-radio{
+    ion-item {
+      ion-radio {
+        width: 22px;
+        height: 22px;
+      }
+      ion-radio::part(container) {
+        border-radius: 100%;
+        background: #EEEEEE;             
+        border-style: none;
+      }
+      ion-radio::part(mark) {
+        background: none;
+        // background: #EEEEEE;            
+        transition: none;
+        transform: none;
+        border-radius: 0;
+      }
+
+      ion-radio.radio-checked::part(container) {
+        background: var(--ion-color-primary);
+        border-color: transparent;
+      }
+
+      ion-radio.radio-checked::part(mark) {
+        width: 5px;
+        height: 10px;
+
+        border-width: 0px 2px 2px 0px;
+        border-style: solid;
+        border-color: #fff;
+
+        transform: rotate(45deg);
+      }
+    }
+    div{
+       ion-radio {
+         width: 22px;
+         height: 22px;
+       }
+       ion-radio::part(container) {
+         border-radius: 100%;
+         background: #EEEEEE;             
+         border-style: none;
+       }
+       ion-radio::part(mark) {
+         background: none;
+         // background: #EEEEEE;            
+         transition: none;
+         transform: none;
+         border-radius: 0;
+       }
+
+       ion-radio.radio-checked::part(container) {
+        background: var(--ion-color-primary);
+        border-color: transparent;
+       }
+
+      ion-radio.radio-checked::part(mark) {
+        width: 5px;
+        height: 10px;
+
+        border-width: 0px 2px 2px 0px;
+        border-style: solid;
+        border-color: #fff;
+
+        transform: rotate(45deg);
+      }
+    }
+  }
+
+  
+  .custom-accorion{
+      ion-accordion.accordion-expanding ion-item[slot="header"],
+      ion-accordion.accordion-expanded ion-item[slot="header"] {
+      //   --background: var(--ion-color-primary);
+        --color: var(--ion-color-primary);
+      }
+      ion-accordion.accordion-expanded > [slot=header] .ion-accordion-toggle-icon {
+          color: var(--ion-color-primary)
+      }
+  }
+  
+
+  ion-toast.custom-toast::part(button) {
+    border-left: 1px solid #d2d2d2;
+    // color: #ff0707 !important;
+    font-size: 12px !important;
+  }
+  
+  ::-webkit-scrollbar {
+      display: none !important;
+  }
+  
+
+
+.custom-loader {
+  background: rgb(255 255 255 / 70%) !important;
+  .loading-wrapper{
+    background: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    img{
+      height:60px;
+    }
+  }
+}
+
+.custom-select{
+    --padding-start: 0px;
+    padding-inline-start: 0px;
+    padding-inline-end: 20px;
+
+    // ion-select{
+    // --padding-start: 0px;
+    // }
+
+    // ion-select::part(text) {
+    //  opacity: 1;
+    //  text-align:left;
+    //  padding-left: 10%;
+    // }
+    
+    ion-select-popover{
+        width: 270px;
+        border:1px solid red;
+    }
+
+    ion-select::part(icon) {
+       opacity: 0.9;
+       padding-right: 10%;
+    }
+
+    .popover-viewport{
+        width: 270px;
+        border:1px solid red;
+    }
+
+    ion-popover::part(content){ 
+    //    width:80vw;
+    border:1px solid red !important;
+    }
+    .popover-content{
+        width: 65%;
+    }
+
+    ion-popover {
+        &::part(content) {
+          min-width: 230px;
+          border:1px solid red !important;
+        }
+      }
+
+    // class="popover-content"
+}
+
+.custom-select ion-select{
+    border:1px solid red !important;
+    width: 65%;
+}
+
+
+.popover-content {
+    width: 270px !important;
+    border: 1px solid red;
+}
+
+
+// ion-popover {
+//   &::part(content) {
+//     min-width: 230px;
+//   }
+// }
+
+// svg .apexcharts-legend{
+//     display:none;
+//     text{
+//         display:none;
+//     }
+// }
+
+
+// .list-slot ~ div{
+
+//     ::slotted([slot="start"]) {
+//       margin-left: unset;
+//       margin-inline-start: 2px;
+//       border: 1px solid red;
+//     }
+//     ::slotted([slot="end"]) {
+//       margin-left: unset;
+//       margin-inline-start: 2px;
+//       border: 1px solid red;
+//     }
+
+//   }
+  
+
+// :host-context(.item-label-stacked) .select-icon, :host-context(.item-label-floating:not(.item-fill-outline)) .select-icon, :host-context(.item-label-floating.item-fill-outline) {
+//     transform: translate3d(0px, -2px, 0px);
+// }
+
+

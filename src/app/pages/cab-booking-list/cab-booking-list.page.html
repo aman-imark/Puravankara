@@ -1,0 +1,75 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cab Booking List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div *ngIf="cabListData?.length === 0" style="position: absolute;top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <p style="opacity: 0.5;">No Data Found!</p>
+  </div>
+  <ion-grid *ngIf="cabListData?.length >= 1" class="ion-no-padding">
+    <ion-row class="custom-padding" style="background:#044584;color:#fff;">
+      <ion-col size="1.8">S.No</ion-col>
+      <ion-col size="8.2">Name</ion-col>
+      <ion-col size="2"></ion-col>
+    </ion-row>
+
+    <ion-row  *ngFor="let cbd of cabListData; let i = index;  let even = even; let odd = odd"  id="{{i+1}}"  [ngClass]="{ 'odd-bg': odd, 'even-bg': even }" class="custom-padding">
+      <ion-col size="1.2" class="col-A">{{i+1}}.</ion-col>
+      <ion-col size="9" class="col-B">
+        <ion-chip  (click)="cabBookingDetails()">
+          <ion-avatar>
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-label>
+            <p *ngIf="cbd.lead_type">{{cbd.lead_type}}</p>
+            <h3 style="font-weight: 600;">{{cbd.firstname}}&nbsp;{{cbd.lastname}}</h3>          
+          </ion-label>
+        </ion-chip>
+      </ion-col>
+      <ion-col size="1.8" class="col-C"> <ion-buttons> <ion-button fill="solid" class="view-btn" (click)="goto_cabBookingDetail(cbd.cabid)">View</ion-button> </ion-buttons> </ion-col>
+    </ion-row>
+
+
+
+    <!-- <ion-row class="custom-padding odd-bg">
+      <ion-col size="1.2" class="col-A">7.</ion-col>
+      <ion-col size="9" class="col-B">
+        <ion-chip>
+          <ion-avatar>
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-label>
+            <p>Commercial Discussion</p>
+            <h3>Sachin Kumar</h3>          
+          </ion-label>
+        </ion-chip>
+      </ion-col>
+      <ion-col size="1.8" class="col-C"> <ion-buttons> <ion-button fill="solid"  class="view-btn">View</ion-button> </ion-buttons> </ion-col>
+    </ion-row> -->
+
+
+    <!-- <ion-row class="custom-padding even-bg">
+      <ion-col size="1.2" class="col-A">8.</ion-col>
+      <ion-col size="9" class="col-B">
+        <ion-chip>
+          <ion-avatar>
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-label>
+            <h3>Sachin Kumar</h3>          
+          </ion-label>
+        </ion-chip>
+      </ion-col>
+      <ion-col size="1.8" class="col-C"> <ion-buttons> <ion-button fill="solid"  class="view-btn">View</ion-button> </ion-buttons> </ion-col>
+    </ion-row> -->
+
+  </ion-grid>
+
+</ion-content>

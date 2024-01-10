@@ -1,0 +1,39 @@
+
+
+
+<div style="min-height: 200px;position:relative;">
+  <div style="position: absolute;right: 0px;top: 0px;left: 0px">
+    <ion-toolbar>
+      <ion-buttons slot="end">
+        <ion-button color="dark" (click)="dismiss()">
+          <ion-icon name="close-sharp" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title slot="start">Share</ion-title>
+    </ion-toolbar>
+  </div>
+
+ 
+  <div class="ion-padding-horizontal" style="margin-top: 60px;">
+    <div style="padding:0px 8px 12px;">
+
+    <form [formGroup]="shareForm" (ngSubmit)="shareBrochure()">
+    <ion-item mode="md" class="item-custom">
+      <ion-label position="floating">
+        <ion-text style="color:#979797;">Email</ion-text>
+        <ion-text style="color:#EF2727;">*</ion-text>
+      </ion-label>
+      <div style="width:100%;display:flex;align-items: center;">
+        <ion-input mode="md" class="input-custom" type="email" formControlName="email" name="email"> </ion-input>
+      </div>
+    </ion-item>
+    <div class="ion-padding-vertical">
+      <ion-button type="submit" style="--border-radius: 10px; text-transform: capitalize;">Submit</ion-button>
+    </div>
+    </form>
+
+    </div>
+  </div>
+
+</div>
+

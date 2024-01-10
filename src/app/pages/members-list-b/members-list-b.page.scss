@@ -1,0 +1,38 @@
+ion-row{
+    align-items: center;
+    .col-C{
+        ion-label{
+            h3{
+                font-size:16px !important;
+                color:#333;
+            }
+            p{
+                font-size:12px !important;
+                line-height:1.4;
+            }        
+        }
+    }
+}
+
+
+ion-chip {
+    --background: transparent;
+    --color: transparent;
+    margin: 0px;
+    min-height: 75px;
+    ion-avatar{
+        height: 3.55em;
+        width: 4em;
+    }
+        ion-label{
+            h3{
+                font-size:16px !important;
+                color:#333;
+            }
+            p{
+                font-size:12px !important;
+                line-height:1.2;
+            }        
+        }
+}
+

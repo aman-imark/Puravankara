@@ -1,0 +1,62 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Terms and Conditions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <!-- <div class="ion-padding">
+    <ion-row class="ion-padding-bottom">
+      <ion-col size="1">1.</ion-col>
+      <ion-col size="11">Selection of applicants is at the absolute discretion of PPL and PPL may accept or reject the application without assigning any reasons.</ion-col>
+    </ion-row>
+
+    <ion-row class="ion-padding-bottom">
+      <ion-col size="1">2.</ion-col>
+      <ion-col size="11">The application shall be complete in all respects and shall be accompanied by requisite documents.</ion-col>
+    </ion-row>
+
+
+    <ion-row class="ion-padding-bottom">
+      <ion-col size="1">3.</ion-col>
+      <ion-col size="11">Constitution Documents and Registration Certificates issued by CT Department/ST Authorities shall accompany the application, without which the application shall not be processed.</ion-col>
+    </ion-row>
+
+
+    <ion-row class="ion-padding-bottom">
+      <ion-col size="1">4.</ion-col>
+      <ion-col size="11">All discussions between PPL and applicant and the information contained in the documents shall be confidential and shall not be disclosed to anyone except to the subsidiaries.</ion-col>
+    </ion-row>
+
+    <ion-row class="ion-padding-bottom">
+      <ion-col size="1">5.</ion-col>
+      <ion-col size="11">Applicant may be entitled to take back the documents submitted within 45 days of submission, thereafter which they will be destroyed.</ion-col>
+    </ion-row>
+
+    <ion-row class="ion-padding-bottom">
+      <ion-col size="1">6.</ion-col>
+      <ion-col size="11">The applicant confirms that he/she/it is not involved in any economic oences, tax default or moral turpitude.</ion-col>
+    </ion-row>
+  </div> -->
+
+
+  <div [innerHtml]="dym_content?.content" class="ion-padding-end"></div>
+
+
+  <div *ngIf="dym_content?.content">
+    <ion-item lines="none">
+      <ion-checkbox [(ngModel)]="isChecked" style="margin-left: 5%;"></ion-checkbox>
+      <ion-label class="ion-margin-start">I accept the Terms & Conditions</ion-label>
+    </ion-item>
+    <div class="ion-padding">
+      <ion-button size="large" expand="block" style="--border-radius: 15px;" (click)="goto_next()">Next</ion-button>
+      <br>
+    </div>
+  </div>
+
+</ion-content>

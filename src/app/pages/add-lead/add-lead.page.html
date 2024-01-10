@@ -1,0 +1,95 @@
+
+<ion-content [fullscreen]="true">
+  <ion-header class="ion-no-border">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button text="" defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="ion-text-start">Add Lead</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+
+
+  <div class="ion-padding-horizontal">
+  <form [formGroup]="leadForm" (ngSubmit)="addLead_form()">
+    <ion-item mode="md" class="item-custom">
+      <ion-label position="floating"><ion-text style="color:#979797;">First Name</ion-text>
+        <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+      <ion-input mode="md" class="input-custom" type="text" formControlName="firstname" name="firstname" required></ion-input>
+    </ion-item>
+    <br>
+    <ion-item mode="md" class="item-custom">
+      <ion-label position="floating"><ion-text style="color:#979797;">Last Name</ion-text>
+        <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+      <ion-input mode="md" class="input-custom" type="text" formControlName="lastname" name="lastname" required></ion-input>
+    </ion-item>
+    <br>
+    <ion-item mode="md" class="item-custom">
+      <ion-label position="floating"><ion-text style="color:#979797;">Email Id</ion-text>
+        <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+      <ion-input mode="md" class="input-custom" type="email" formControlName="email" name="email" required></ion-input>
+    </ion-item>
+    <br>
+    
+
+
+    <ion-item mode="md" class="item-custom">
+      <ion-label position="floating"><ion-text style="color:#979797;">Mobile No</ion-text>
+        <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+      <ion-input mode="md" class="input-custom" type="tel" formControlName="mobile" name="mobile" required></ion-input>
+    </ion-item>
+    <br>
+
+
+
+    <ion-item mode="md" class="item-custom">
+      <ion-label position="floating"><ion-text style="color:#979797;">Alternate Number</ion-text></ion-label>
+      <ion-input mode="md" class="input-custom" type="tel" formControlName="alternate_number" name="alternate_number"></ion-input>
+    </ion-item>
+    <br>
+
+
+    
+    <ion-item class="item-custom">
+      <ion-select (ionChange)="citySelectEvent($event)" 
+      placeholder="City"  formControlName="city_id" name="city_id" required style="width:100%; font-size: 14px;">
+        <ion-select-option *ngFor="let cty of cityData" [value]="cty.id">{{cty.city_name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <br>
+
+    
+    <ion-item class="item-custom">
+      <ion-select  placeholder="Channel Partner"  formControlName="channel_partner" 
+      name="channel_partner"  required style="width:100%;font-size: 14px;">
+        <ion-select-option value="1">Purva Land</ion-select-option>
+        <ion-select-option value="2">Puravankara</ion-select-option>
+         <ion-select-option value="3">Provident</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <br>
+
+
+
+    <ion-item class="item-custom">
+      <ion-select #projectSelect [multiple]="false" placeholder="Project Intersted"  
+                  formControlName="project_id" name="project_id" required style="width:100%;font-size: 14px;">
+        <ion-select-option *ngIf="projectData?.length === 0" disabled value="no_project">No Project</ion-select-option>
+        <ion-select-option  *ngFor="let prj of projectData" [value]="prj.id">{{prj.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+ 
+   
+    <br> <br>
+    <div class="ion-padding-top ion-padding-bottom">
+      <ion-button type="submit" size="large" expand="block" style="--border-radius: 15px;">Submit</ion-button>
+    </div>  
+  </form>
+
+  </div>
+
+
+</ion-content>

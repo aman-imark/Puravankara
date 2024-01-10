@@ -1,0 +1,42 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>exploreResidential</ion-title>
+  </ion-toolbar>
+</ion-header>  -->
+
+
+
+<ion-content [fullscreen]="true">
+
+  <ion-header class="ion-no-border">
+    <ion-toolbar class="ion-padding-top ion-padding-bottom">
+      <ion-buttons slot="start">
+        <ion-back-button text="" defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="ion-text-start"><ion-text style="display:block;">Explore Our Residential</ion-text><ion-text style="display:block;">Projects</ion-text></ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+
+  <div *ngIf="cityData" class="ion-padding custom-radio"> 
+    <form>
+      <ion-radio-group class="ion-margin-bottom" mode="md"  (ionChange)="radioValueSelect($event)" allow-empty-selection="true">
+        <ion-item *ngFor="let cty of cityData" mode="md" lines="none" class="custom-itm ion-margin-bottom">
+          <ion-label style="display:flex;align-items:center;">
+            <div style="height: 45px;width: 45px;">
+              <img [src]="cty.image" style="height:100%;width:100%;object-fit:cover;">
+            </div>
+            <ion-text class="ion-margin-start">{{cty.city_name}}</ion-text>
+          </ion-label>
+          <ion-radio slot="end" [value]="cty.id" mode="md"></ion-radio>
+        </ion-item> <br>
+      </ion-radio-group>
+  
+
+      <div class="ion-padding-top">
+        <ion-button type="submit" size="large" expand="block" style="--border-radius: 15px;" (click)="goto_residentialDetails()">Next</ion-button>
+      </div>  
+    </form>
+  </div>
+
+</ion-content>

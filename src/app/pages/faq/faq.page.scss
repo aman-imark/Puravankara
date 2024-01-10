@@ -1,0 +1,15 @@
+.faq{ 
+    ion-item {
+      --border-radius: 8px;
+      --background: #E9E9E9;    
+      ion-label{
+        font-size: 14px;
+      }
+    }
+    div{
+      ion-label{
+        font-size: 14px;
+        color:#666666;        
+      }
+    }
+}

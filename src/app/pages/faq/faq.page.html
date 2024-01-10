@@ -1,0 +1,26 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>FAQ's</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div class="ion-padding faq">
+    <ion-accordion-group value="1">
+      <ion-accordion  *ngFor="let faq of faqData; let i = index" value="{{i}}" class="ion-margin-bottom">
+        <ion-item slot="header"  lines="none">
+          <ion-label style="font-weight:600;">{{faq.name}}</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-label>{{faq.details}}</ion-label>
+        </div>
+      </ion-accordion> 
+    </ion-accordion-group>
+  </div>
+
+</ion-content>

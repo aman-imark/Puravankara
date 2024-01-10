@@ -1,0 +1,60 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Site Visit</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div *ngIf="allLeadData?.length === 0" style="position: absolute;top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <p style="opacity: 0.5;">No Data Found!</p>
+  </div>
+
+  <ion-grid *ngIf="allLeadData?.length >= 1" class="ion-no-padding">
+    <ion-row class="custom-padding" style="background:#044584;color:#fff;">
+      <ion-col size="1.8">S.No</ion-col>
+      <ion-col size="8.2">Name</ion-col>
+      <ion-col size="2"></ion-col>
+    </ion-row> 
+
+
+    <ion-row *ngFor="let ste of allLeadData; let i=index; let even= even; let odd = odd" id="{{i}}" [ngClass]="{ 'odd-bg': odd, 'even-bg': even }" class="custom-padding">
+      <ion-col size="1" class="col-A">{{i+1}}.</ion-col>
+      <ion-col size="8.6" class="col-B">
+          <ion-chip>
+          <ion-avatar>
+            <img alt="Silhouette of a person's head" [src]="ste.image" />
+          </ion-avatar>
+          <ion-label>
+            <p>{{ste.lead_type}}</p>
+            <h3 style="font-weight:600;">{{ste.firstname}}&nbsp;{{ste.lastname}}</h3>          
+          </ion-label>
+        </ion-chip>
+      </ion-col>
+      <ion-col size="2.4" class="col-C"> 
+        <ion-buttons *ngIf="ste?.lead_type === 'Warm Lead'"> 
+          <ion-button fill="solid" class="book-btn" (click)="siteVisitModal(ste.firstname+'&nbsp;'+ste.lastname, ste.id, ste.created_at)">Site Visit</ion-button> 
+        </ion-buttons>
+
+        <ion-buttons *ngIf="ste?.lead_type === 'Site Visit Scheduled' && ste?.booking_status === 0"> 
+          <ion-button fill="solid" class="book-btn" (click)="cabBookingModal(ste.firstname+'&nbsp;'+ste.lastname, ste.id, ste.date, ste.time)">Book Cab</ion-button> 
+        </ion-buttons> 
+
+
+        <ion-buttons *ngIf="ste?.booking_status === 1"> 
+          <ion-button fill="outline" class="book-btn" disabled color="success" style="letter-spacing: 0px;">Cab Booked</ion-button> 
+        </ion-buttons> 
+
+        <ion-buttons *ngIf="cbd?.booking_status === 0"> 
+          <ion-button fill="solid" class="book-btn" (click)="cabBookingModal(cbd.firstname+'&nbsp;'+cbd.lastname, cbd.id)">Book</ion-button> 
+        </ion-buttons> 
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

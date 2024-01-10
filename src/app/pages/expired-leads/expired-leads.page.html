@@ -1,0 +1,121 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Expired Leads</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div *ngIf="expiredLeadData?.length == '0'" style="position: absolute;top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <p style="opacity: 0.5;">No Data Found!</p>
+  </div>
+
+  <ion-grid *ngIf="expiredLeadData?.length >= '1'" class="ion-no-padding">
+    <ion-row class="custom-padding" style="background:#044584;color:#fff;">
+      <ion-col size="1.5">S.No</ion-col>
+      <ion-col size="6">Name</ion-col>
+      <ion-col size="3"></ion-col>
+      <!-- <ion-col size="3">City</ion-col> -->
+      <ion-col size="1.5"></ion-col>
+    </ion-row>
+
+    <ion-row *ngFor="let exp of expiredLeadData; let i = index;  let even = even; let odd = odd"  id="{{i}}"  [ngClass]="{ 'odd-bg': odd, 'even-bg': even }" class="custom-padding">
+      <ion-row>
+      <ion-col size="1.2" class="col-A" style="font-weight:600;">{{i+1}}.</ion-col>
+      <ion-col size="9" class="col-B">
+        <ion-chip>
+          <ion-avatar>
+            <img alt="avatar" [src]="exp.image">
+          </ion-avatar>
+          <ion-label>
+            <p class="lead-p" [ngClass]="exp.lead_type == 'Expired Lead' ? 'expired-color' : 'warm-color'">{{exp?.lead_type || 'unknwon'}}</p>
+            <h3 style="font-weight:600;">{{exp.firstname}}&nbsp;{{exp.lastname}}</h3>          
+          </ion-label>
+        </ion-chip>
+      </ion-col>
+      <!-- <ion-col size="3" class="col-C"><ion-label><h3 style="font-weight:600;">{{exp.city_name}}</h3></ion-label></ion-col> -->
+      <ion-col size="1.8" class="col-D">
+        <ion-buttons *ngIf="exp.show === false">
+           <ion-button fill="solid"  class="view-btn" (click)="viewClicked(i)">View</ion-button> 
+        </ion-buttons>
+        <ion-buttons *ngIf="exp.show === true">
+          <ion-button (click)="closeClicked(i)"> <ion-icon slot="icon-only" name="close-sharp"></ion-icon> </ion-button> 
+        </ion-buttons> 
+      </ion-col>
+      </ion-row>
+
+      <ion-row  *ngIf="exp.show === true">
+        <ion-row>
+          <ion-col size="1.2"></ion-col>
+          <ion-col size="10.8" *ngIf="exp.email">
+            <ion-label class="icon-text-label"><ion-icon name="mail"></ion-icon>&nbsp;&nbsp;<h3>{{exp.email !== null ? exp.email : 'unknown'}}</h3></ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row  *ngIf="exp.city_name">
+          <ion-col size="1.2"></ion-col>
+          <ion-col size="10.8" *ngIf="exp.city_name">
+            <ion-label class="icon-text-label"><ion-icon name="business"></ion-icon>&nbsp;&nbsp;<h3>{{exp.city_name !== null ? exp.city_name : 'unknown'}}</h3></ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="1.2"></ion-col>
+          <ion-col size="5.4">
+            <ion-label class="icon-text-label"><ion-icon name="call"></ion-icon>&nbsp;&nbsp;<h3>{{exp.mobile !== null ? exp.mobile : 'unknown'}}</h3></ion-label>
+          </ion-col>
+          <ion-col size="5.4">
+            <ion-label class="icon-text-label"><ion-icon name="business"></ion-icon>&nbsp;&nbsp;<h3>{{exp.company_name !== null ? exp.company_name : 'unknown'}}</h3></ion-label>
+          </ion-col>  
+        </ion-row>
+        <ion-row>          
+          <ion-col size="1.2"></ion-col>
+          <ion-col size="10.8" style="padding-top:10px;">
+            <ion-label>
+              <p>Lead by: {{exp.leadby !== null ? exp.leadby : 'unknown'}}</p>
+              <p>Brand Name: {{exp.brand_name !== null ? exp.brand_name : 'unknown'}}</p>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-row>
+
+    </ion-row>
+
+    <!-- <ion-row class="custom-padding odd-bg">
+      <ion-col size="1.2" class="col-A">7.</ion-col>
+      <ion-col size="6.3" class="col-B">
+        <ion-chip>
+          <ion-avatar>
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-label>
+            <p>Expired Lead</p>
+            <h3>Sachin Kumar</h3>          
+          </ion-label>
+        </ion-chip>
+      </ion-col>
+      <ion-col size="3" class="col-C"><ion-label><h3>Bangalore</h3></ion-label></ion-col>
+      <ion-col size="1.5" class="col-D"> <ion-buttons> <ion-button fill="solid"  class="view-btn">View</ion-button> </ion-buttons> </ion-col>
+    </ion-row>
+
+    <ion-row class="custom-padding even-bg">
+      <ion-col size="1.2" class="col-A">8.</ion-col>
+      <ion-col size="6.3" class="col-B">
+        <ion-chip>
+          <ion-avatar>
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-label>
+            <p>Expired Lead</p>
+            <h3>Sachin Kumar</h3>          
+          </ion-label>
+        </ion-chip>
+      </ion-col>
+      <ion-col size="3" class="col-C"><ion-label><h3>Pune</h3></ion-label></ion-col>
+      <ion-col size="1.5" class="col-D"> <ion-buttons> <ion-button fill="solid"  class="view-btn">View</ion-button> </ion-buttons> </ion-col>
+    </ion-row> -->
+  </ion-grid>
+
+</ion-content>

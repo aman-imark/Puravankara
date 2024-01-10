@@ -1,0 +1,29 @@
+
+.card-A{
+    ion-label{
+        p{
+           font-weight:500;
+        }
+        h2{
+           font-weight:600; color:#333;
+        }
+    }
+}
+
+.card-B{
+    ion-label{
+        p{
+           font-size: 12px; font-weight:500; color:#333;
+        }
+        h3{
+            font-size:14px; font-weight:600; color:#333;
+        }
+    }
+    ion-row{
+        // box-shadow: 0 2px 4px 2px #00000015;
+        box-shadow: 0 1.5px 2px 0.5px #00000015;
+    }
+}
+
+
+

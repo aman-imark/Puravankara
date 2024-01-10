@@ -1,0 +1,104 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cab Booking Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+
+<ion-content>
+  <ion-card mode="ios">
+    <ion-card-content>
+    <ion-row>
+        <ion-col size="12">
+          <ion-item lines="none" class="ion-no-padding" style="--background:transparent;">
+            <ion-avatar *ngIf="cabDataA?.firstname" slot="start">
+              <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            </ion-avatar>
+            <ion-label>
+              <h1>{{cabDataA?.firstname}}&nbsp;{{cabDataA?.lastname}}</h1>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-label>
+            <p style="font-size:12px !important;">{{cabDataA?.leadby}}</p>
+            <p style="font-size:12px !important;">{{cabDataA?.rera_no}}</p>
+          </ion-label>
+        </ion-col>
+        <ion-col size="6" *ngIf="cabDataA?.city_name">
+          <ion-label class="icon-text-label2"><ion-icon name="location-sharp"></ion-icon>&nbsp;&nbsp;<h3>{{cabDataA?.city_name}}</h3></ion-label>
+        </ion-col>
+        <ion-col size="6" *ngIf="cabDataA?.mobile">
+          <ion-label class="icon-text-label2"><ion-icon name="call"></ion-icon>&nbsp;&nbsp;<h3>{{cabDataA?.mobile}}</h3></ion-label>
+        </ion-col>
+        <ion-col size="12" *ngIf="cabDataA?.email">
+          <ion-label class="icon-text-label2"><ion-icon name="mail"></ion-icon>&nbsp;&nbsp;<h3>{{cabDataA?.email}}</h3></ion-label>
+        </ion-col>
+        <ion-col size="6" *ngIf="cabDataA?.dob">
+          <ion-label class="icon-text-label2"><ion-icon name="calendar-clear"></ion-icon>&nbsp;&nbsp;<h3>{{cabDataA?.dob}}</h3></ion-label>
+        </ion-col>
+        <ion-col size="6" *ngIf="cabDataA?.company_number">
+          <ion-label class="icon-text-label2"><ion-icon name="call"></ion-icon>&nbsp;&nbsp;<h3>{{cabDataA?.company_number}}</h3></ion-label>
+        </ion-col>
+    </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card mode="ios">
+    <ion-card-content *ngIf="cabDataB == null" style="height: 20vh;">
+      <div style="position: absolute;top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <p style="opacity: 0.5;">No Data Found!</p>
+      </div>
+    </ion-card-content>
+
+
+    <ion-card-content *ngIf="cabDataB != null">
+      <h1 style="padding-left: 4px;">Date & Time</h1>
+      <ion-row class="ion-padding-vertical">
+        <ion-col size="6">
+          <ion-label><p>Date</p><h3>{{cabDataB?.date || 'unknown'}}</h3></ion-label>
+        </ion-col>
+        <ion-col size="6">
+          <ion-label><p>Time</p><h3>{{cabDataB?.time || 'unknown'}}</h3></ion-label>
+        </ion-col>
+        <ion-col size="6">
+          <ion-label><p>Number of Visitors</p><h3>{{cabDataB?.number || 'unknown'}}</h3></ion-label>
+        </ion-col>
+      </ion-row>
+      <br>
+
+      <h1 style="padding-left: 4px;">Pick Up & Drop Off</h1>
+      <ion-row class="ion-padding-vertical">
+        <ion-col size="12">
+          <ion-label><p>Pick Up</p><h3>{{cabDataB?.pick_up || 'unknown'}}</h3></ion-label>
+        </ion-col>
+        <ion-col size="12">
+          <ion-label><p>Drop Off</p><h3>{{cabDataB?.drop_off || 'unknown'}}</h3></ion-label>
+        </ion-col>
+      </ion-row>
+      <br>
+
+      <h1 style="padding-left: 4px;">Projects</h1>
+      <ion-row class="ion-padding-vertical">
+        <ion-col size="12">
+          <ion-label *ngFor="let cprj of cabDataC; let i = index"><p>{{cprj}}&nbsp;</p></ion-label>
+        </ion-col>
+      </ion-row>
+      <br>
+
+      <div>
+        <ion-buttons> <ion-button fill="solid" (click)="cancelCabBooking()">Cancel Cab Booking</ion-button> </ion-buttons> 
+      </div>
+      
+      
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

@@ -1,0 +1,138 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Filter</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-text color="dark" style="letter-spacing: 0;font-weight: 600;" (click)="clearFilter()">Clear Filter</ion-text>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+
+  <ion-accordion-group value="lead_status">
+
+    <ion-accordion value="lead_status">
+      <ion-item slot="header" lines="full" > <ion-label style="font-weight:600;font-size: 18px;">Lead Status</ion-label> </ion-item>
+      <div class="inner" slot="content">
+          <div *ngIf="(!leadTypeFilterData)" style="display:flex; align-items:center;height:100px;justify-content: center;">
+            <div><ion-spinner name="crescent"></ion-spinner></div>
+          </div>
+          <div *ngIf="(leadTypeFilterData)">
+          <form #form1="ngForm">
+          <ion-item lines="none" *ngFor="let typ of leadTypeFilterData">
+            <ion-checkbox slot="end" [id]="typ.id+'/'+typ.type_name" [(ngModel)]="typ.selected" name="{{typ.id}}" style="margin: 0px;"></ion-checkbox>&nbsp;&nbsp;
+            <ion-label>
+              <div style="display:flex;justify-content: space-between;color:#212529;font-weight:500;">
+                <ion-text>{{typ.type_name}}</ion-text>
+              </div>
+            </ion-label>
+          </ion-item>
+          </form>
+          </div>
+      </div>
+    </ion-accordion>
+ 
+    <ion-accordion value="city_select">
+      <ion-item slot="header" lines="full" > <ion-label style="font-weight:600;font-size: 18px;">City</ion-label> </ion-item>
+      <div class="inner" slot="content">
+          <div *ngIf="(!cityFilterData)" style="display:flex; align-items:center;height:100px;justify-content: center;">
+            <div><ion-spinner name="crescent"></ion-spinner></div>
+          </div>
+          <div *ngIf="(cityFilterData)">
+          <form #form2="ngForm">
+          <ion-item lines="none" *ngFor="let cty of cityFilterData">
+            <ion-checkbox slot="end" [id]="cty.id+'/'+cty.city_name" [(ngModel)]="cty.selected" name="{{cty.id}}" style="margin: 0px;"></ion-checkbox>&nbsp;&nbsp;
+            <ion-label>
+              <div style="display:flex;justify-content: space-between;color:#212529;font-weight:500;">
+                <ion-text>{{cty.city_name}}</ion-text>
+              </div>
+            </ion-label>
+          </ion-item>
+          </form>
+          </div>
+      </div>
+    </ion-accordion>
+
+    <ion-accordion value="project_select">
+      <ion-item slot="header" lines="full" > <ion-label style="font-weight:600;font-size: 18px;">Projects</ion-label>  </ion-item>
+      <div class="inner" slot="content">
+          <div *ngIf="(!projectFilterData)" style="display:flex; align-items:center;height:100px;justify-content: center;">
+            <div><ion-spinner name="crescent"></ion-spinner></div>
+          </div>
+          <div *ngIf="(projectFilterData)">
+          <form #form3="ngForm">
+          <ion-item lines="none" *ngFor="let prj of projectFilterData">
+            <ion-checkbox slot="end" [id]="prj.id+'/'+prj.name" [(ngModel)]="prj.selected" name="{{prj.id}}" style="margin: 0px;"></ion-checkbox>&nbsp;&nbsp;
+            <ion-label>
+              <div style="display:flex;justify-content: space-between;color:#212529;font-weight:500;">
+                <ion-text>{{prj.name}}</ion-text>
+              </div>
+            </ion-label>
+          </ion-item>
+          </form>
+          </div>
+      </div>
+    </ion-accordion>
+
+    <ion-accordion value="project_member">
+      <ion-item slot="header" lines="full" > <ion-label style="font-weight:600;font-size: 18px;">Members</ion-label>  </ion-item>
+      <div class="inner" slot="content">
+        <ion-item>
+          <ion-label position="floating"><ion-text style="color:#979797;">Search Member</ion-text></ion-label>
+          <ion-input type="text" [(ngModel)]="filterMember"
+                     (ionInput)="memberInputInput()" (ionBlur)="memberInputBlur()"  (ionFocus)="memberInputFocus()" (ionChange)="memberInputChange()"></ion-input>
+          <ion-input hidden readonly type="text" [(ngModel)]="filterData.member_id" required></ion-input>
+        </ion-item>
+        <div *ngIf="memberSugData && showMemberSug === true">
+          <ion-item lines="none" class="ion-no-padding" *ngFor="let msd of memberSugData | filter: filterMember" (click)="memberAutoCompleteValue(msd.id, msd.name)">
+            <ion-label>{{msd.name}}</ion-label>
+            <ion-icon name="trending-up" slot="end"></ion-icon>
+          </ion-item>
+        </div>        
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <br>
+  <div class="ion-padding-horizontal ion-padding-bottom">
+    <ion-button  type="button" size="large" expand="block" style="--border-radius: 15px;" (click)="applyFilter()">Apply</ion-button>
+  </div> 
+
+
+
+  <!-- <div class="ion-padding custom-radio">
+
+      <div class="ion-padding-horizontal">
+        <h4>Members</h4>
+          <ion-item mode="md" class="item-custom">
+            <ion-label position="floating"><ion-text style="color:#979797;">Search Member</ion-text></ion-label>
+            <ion-input mode="md" class="input-custom" type="text" [(ngModel)]="filterMember"
+                       (ionInput)="memberInputInput()" (ionBlur)="memberInputBlur()"  (ionFocus)="memberInputFocus()" (ionChange)="memberInputChange()"></ion-input>
+            <ion-input hidden mode="md" readonly  type="text" [(ngModel)]="filterData.member_id" required></ion-input>
+          </ion-item>
+          <div *ngIf="memberSugData && showMemberSug === true">
+            <ion-item lines="none" class="ion-no-padding" *ngFor="let msd of memberSugData | filter: filterMember" (click)="memberAutoCompleteValue(msd.id, msd.name)">
+              <ion-label>{{msd.name}}</ion-label>
+              <ion-icon name="trending-up" slot="end"></ion-icon>
+            </ion-item>
+          </div>
+      </div>
+
+  </div>
+  <br>
+  <div class="ion-padding-horizontal ion-padding-bottom">
+    <ion-button  type="button" size="large" expand="block" style="--border-radius: 15px;" (click)="applyFilter()">Apply</ion-button>
+  </div>  -->
+
+</ion-content>
+

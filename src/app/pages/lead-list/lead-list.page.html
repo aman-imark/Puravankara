@@ -1,0 +1,168 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Lead List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div *ngIf="allLeadData?.length === 0" style="position: absolute;top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <p style="opacity: 0.5;">No Data Found!</p>
+  </div>
+
+
+  <div>
+  <ion-toolbar mode="md" style="padding:2px;">
+    <ion-buttons>
+      <ion-button color="primary" (click)="uploadLeadModal()">
+        <ion-icon name="share-outline" class="icon-custom"></ion-icon>&nbsp;<ion-text color="dark" style="letter-spacing: 0;font-weight: 500;">Upload</ion-text>
+      </ion-button>
+      <ion-button color="primary" [routerLink]="['/add-lead']">
+        <ion-icon name="add-outline" class="icon-custom"></ion-icon>&nbsp;<ion-text color="dark" style="letter-spacing: 0;font-weight: 500;">Add Lead</ion-text>
+      </ion-button>
+      <ion-button color="primary" (click)="filterModal()">
+        <ion-icon name="options-outline" class="icon-custom"></ion-icon>&nbsp;<ion-text color="dark" style="letter-spacing: 0;font-weight: 500;">Filter</ion-text>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+
+  <div *ngIf="filterSet === true" class="ion-padding-horizontal ion-padding-bottom filter-chip">
+        <ion-chip *ngIf="filterTagData?.City_Name" id="City_Name">
+          <ion-label style="font-weight:600;">{{filterTagData?.City_Name}}</ion-label>
+          <ion-icon name="close-sharp" (click)="removeFilterElement('City_Name')"></ion-icon>
+        </ion-chip>
+        <ion-chip *ngIf="filterTagData?.Lead_Name" id="Lead_Name">
+          <ion-label style="font-weight:600;">{{filterTagData?.Lead_Name}}</ion-label>
+          <ion-icon name="close-sharp" (click)="removeFilterElement('Lead_Name')"></ion-icon>
+        </ion-chip>
+        <ion-chip *ngIf="filterTagData?.Project_Name" id="Project_Name">
+          <ion-label style="font-weight:600;">{{filterTagData?.Project_Name}}</ion-label>
+          <ion-icon name="close-sharp" (click)="removeFilterElement('Project_Name')"></ion-icon>
+        </ion-chip>
+        <ion-chip *ngIf="filterTagData?.member_name" id="member_name">
+          <ion-label style="font-weight:600;">{{filterTagData?.member_name}}</ion-label>
+          <ion-icon name="close-sharp" (click)="removeFilterElement('member_name')"></ion-icon>
+        </ion-chip>
+  </div>
+
+  
+  <ion-grid class="ion-no-padding">
+    <ion-row class="custom-padding" style="background:#044584;color:#fff;">
+      <ion-col size="1.8">S.No</ion-col>
+      <ion-col size="8.2">Name</ion-col>
+      <ion-col size="2"></ion-col>
+    </ion-row>
+
+    <ion-row *ngFor="let ald of allLeadData; let i = index;  let even = even; let odd = odd"  id="{{i}}"  [ngClass]="{ 'odd-bg': odd, 'even-bg': even }" class="custom-padding">
+      <ion-row>
+      <ion-col size="1.2" class="col-A">{{i+1}}.</ion-col>
+      <ion-col size="9" class="col-B">
+        <ion-chip>
+          <ion-avatar>
+            <img alt="Silhouette of a person's head" [src]="ald.image" />
+          </ion-avatar>
+          <ion-label>
+            <p class="lead-p" [ngClass]="ald.lead_type == 'Expired Lead' ? 'expired-color' : 'warm-color'">{{ald?.lead_type || 'unknwon'}}</p>
+            <h3 style="font-weight:600;">{{ald.firstname}}&nbsp;{{ald.lastname}}</h3>          
+          </ion-label>
+        </ion-chip>
+      </ion-col>
+      <ion-col size="1.8" class="ion-text-end"> 
+        <ion-buttons *ngIf="ald.show === false">
+           <ion-button fill="solid"  class="view-btn" (click)="viewClicked(i)">View</ion-button> 
+        </ion-buttons>
+        <ion-buttons *ngIf="ald.show === true">
+          <ion-button (click)="closeClicked(i)"> <ion-icon slot="icon-only" name="close-sharp"></ion-icon> </ion-button> 
+        </ion-buttons> 
+      </ion-col>
+      </ion-row>
+
+
+      <ion-row  *ngIf="ald.show === true">
+        <ion-col size="1.2"></ion-col>
+        <ion-col size="10.8">
+          <ion-label class="icon-text-label"><ion-icon name="mail"></ion-icon>&nbsp;&nbsp;<h3>{{ald.email !== null ? ald.email : 'unknown'}}</h3></ion-label>
+
+          <ion-row>
+            <ion-col size="6" *ngIf="ald.city_name">
+              <ion-label class="icon-text-label"><ion-icon name="business"></ion-icon>&nbsp;&nbsp;<h3>{{ald.city_name !== null ? ald.city_name : 'unknown'}}</h3></ion-label>
+            </ion-col>
+            <ion-col size="5" *ngIf="ald.mobile">
+              <ion-label class="icon-text-label"><ion-icon name="call"></ion-icon>&nbsp;&nbsp;<h3>{{ald.mobile !== null ? ald.mobile : 'unknown'}}</h3></ion-label>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="6" *ngIf="ald.company_name">
+              <ion-label class="icon-text-label"><ion-icon name="business"></ion-icon>&nbsp;&nbsp;<h3>{{ald.company_name !== null ? ald.company_name : 'unknown'}}</h3></ion-label>
+            </ion-col>
+            <ion-col size="5" *ngIf="ald.alternate_number">
+              <ion-label class="icon-text-label"><ion-icon name="call"></ion-icon>&nbsp;&nbsp;<h3>{{ald.alternate_number !== null ? ald.alternate_number : 'unknown'}}</h3></ion-label>
+            </ion-col>
+          </ion-row>
+
+          <ion-row style="margin-top: 5px;">
+            <ion-col size="6" *ngIf="ald.leadby">
+              <ion-label><p><span style="color: #000;font-weight: 600;">Lead by: </span> {{ald.leadby !== null ? ald.leadby : 'unknown'}}</p></ion-label>
+            </ion-col>
+            <ion-col size="6" *ngIf="ald.channel_partner">
+              <ion-label><p><span style="color: #000;font-weight: 600;">Brand: </span> {{ald.channel_partner !== null ? ald.channel_partner : 'unknown'}}</p></ion-label>
+            </ion-col>
+          </ion-row>
+
+          <ion-row style="margin-top: 5px;" *ngIf="ald.salesforceid">
+            <ion-col size="12">
+              <ion-label><p><span style="color: #000;font-weight: 600;">Salesforce ID: </span> {{ald.salesforceid !== null ? ald.salesforceid : 'unknown'}}</p></ion-label>
+            </ion-col>
+          </ion-row>
+
+          <ion-row style="margin-top: 5px;" *ngIf="ald.created_at">
+            <ion-col size="12">
+              <!-- <ion-label *ngIf="ald.lead_type == 'Warm Lead'"><p><span style="color: #000;font-weight: 600;">Validity Days: </span> {{ ald.created_at | daysLeft }}</p></ion-label> -->
+              <ion-label *ngIf="ald.lead_type == 'Warm Lead'"><p><span style="color: #000;font-weight: 600;">Validity Days: </span> {{ ald.created_at | dateOnly }}</p></ion-label>
+              <!-- 2023-05-09 08:15:36 -->
+            </ion-col>
+          </ion-row>
+
+          <ion-row style="margin-top: 5px;" *ngIf="ald.projectname">
+            <ion-col size="12">
+              <ion-label> <p><span style="color: #000;font-weight: 600;">Projects Names: </span> {{ald.projectname !== null ? ald.projectname : 'unknown'}}</p></ion-label>
+            </ion-col>
+          </ion-row>
+
+          <ion-row style="margin-top: 5px;" *ngIf="ald.channel_partner">
+            <ion-col size="12">
+              <ion-label> <p><span style="color: #000;font-weight: 600;">Channel Partner: </span> {{ald.channel_partner !== null ? ald.channel_partner: 'unknown'}}</p></ion-label>
+            </ion-col>
+          </ion-row>
+
+        </ion-col>
+
+      </ion-row>
+    </ion-row>
+
+
+    <!-- <ion-row class="custom-padding even-bg">
+      <ion-col size="1.2" class="col-A">8.</ion-col>
+      <ion-col size="9" class="col-B">
+        <ion-chip>
+          <ion-avatar>
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-label>
+            <h3>Sachin Kumar</h3>          
+          </ion-label>
+        </ion-chip>
+      </ion-col>
+      <ion-col size="1.8" class="col-C"> <ion-buttons> <ion-button fill="solid"  class="view-btn">View</ion-button> </ion-buttons> </ion-col>
+    </ion-row> -->
+  </ion-grid>
+  </div>
+
+
+</ion-content>

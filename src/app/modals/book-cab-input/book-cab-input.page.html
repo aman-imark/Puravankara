@@ -1,0 +1,193 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="padding:10px 4px 0px;max-height:60px;">
+    <ion-buttons slot="end" style="z-index:10;">
+      <ion-button color="dark" (click)="dismiss()">
+         <ion-icon slot="icon-only" name="close-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title size="small" style="color:#505050;">Booking for {{name ||'unknown'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+<div class="ion-padding-horizontal" style="min-height:320px;">
+    <div style="padding:0px 8px 12px;">
+    <h5 style="margin-top: 0px;">{{titleText}}</h5>
+
+    <form [formGroup]="cab_form" (ngSubmit)="bookCabSubmit()" class="ion-padding-vertical">
+      <ion-list  *ngIf="formA === true">
+        <ion-item mode="md" class="item-custom">
+          <ion-input mode="md"  placeholder="Date" class="input-custom" type="text" readonly="true" 
+                     name="cab_date" formControlName="cab_date"> </ion-input>
+          <!-- <div style="width:auto;display:flex;align-items: center;">
+            <ion-buttons>
+              <ion-button color="primary" (click)="dateSelectModal()">
+                <ion-icon slot="icon-only" name="calendar-number-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </div> -->
+        </ion-item>
+        <br>
+  
+        <ion-item mode="md" class="item-custom">
+          <ion-input mode="md"  placeholder="Time"  class="input-custom" type="text" readonly="true" 
+                     name="cab_time" formControlName="cab_time"> </ion-input>
+          <!-- <div style="width:auto;display:flex;align-items: center;">
+            <ion-buttons>
+              <ion-button color="primary" (click)="timeSelectModal('cab_time')">
+                <ion-icon slot="icon-only" name="time"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </div> -->
+        </ion-item>
+        <br>
+
+
+        <ion-item mode="md" class="item-custom">
+          <ion-select placeholder="Number of Persons" required 
+                      style="width:100%;" name="cab_person_num" formControlName="cab_person_num">
+            <ion-select-option value="1">1</ion-select-option>
+            <ion-select-option value="2">2</ion-select-option>
+            <ion-select-option value="3">3</ion-select-option>
+            <ion-select-option value="4">4</ion-select-option>
+            <ion-select-option value="5">5</ion-select-option>
+            <ion-select-option value="6">6</ion-select-option>
+            <ion-select-option value="7">7</ion-select-option>
+            <ion-select-option value="8">8</ion-select-option>
+            <ion-select-option value="9">9</ion-select-option>
+            <ion-select-option value="10">10</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+      </ion-list>
+
+      <ion-list  *ngIf="formA === false">
+        <ion-item mode="md" class="item-custom">
+          <ion-label position="floating">
+            <ion-text style="color:#979797;">Pick Up</ion-text>
+          </ion-label>
+          <div style="width:100%;display:flex;align-items: center;">
+            <ion-input mode="md" class="input-custom" type="text" name="cab_pickup" clearInput="true"
+            formControlName="cab_pickup" (ionInput)="filterList()"></ion-input>
+          </div>
+        </ion-item>        
+        <ion-list>
+          <ion-radio-group [allowEmptySelection]="true" (ionChange)="radioSelectedPlace($event)">
+            <ion-item *ngFor="let plc of searchPlaces" style="--padding-start: 0px;--inner-padding-end: 0px;">
+              <ion-label style="font-size: 14px;">{{ plc.description }}</ion-label>
+              <ion-radio slot="end" value="{{ plc.description }}" mode="ios"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+
+
+
+        <ion-item mode="md" class="item-custom" *ngIf="cab_form.value.cab_checkbox === false">
+          <ion-label position="floating">
+            <ion-text style="color:#979797;">Drop Off</ion-text>
+          </ion-label>
+          <div style="width:100%;display:flex;align-items: center;">
+            <ion-input mode="md" class="input-custom" type="text" name="cab_dropoff" clearInput="true"
+            formControlName="cab_dropoff" (ionInput)="filterList2()"></ion-input>
+          </div>
+        </ion-item>
+        <ion-list>
+          <ion-radio-group [allowEmptySelection]="true" (ionChange)="radioSelectedPlace2($event)">
+            <ion-item *ngFor="let plc of searchPlaces2" style="--padding-start: 0px;--inner-padding-end: 0px;">
+              <ion-label style="font-size: 14px;">{{ plc.description }}</ion-label>
+              <ion-radio slot="end" value="{{ plc.description }}" mode="ios"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+
+   
+        <ion-item lines="none" class="ion-margin-top" style="--padding-start:0px;">
+          <ion-checkbox mode="ios" name="cab_checkbox" formControlName="cab_checkbox" (ionChange)="differentCheckbox($event)"></ion-checkbox>
+          <ion-label>Different Dropoff Location?</ion-label>
+        </ion-item>
+      </ion-list>
+
+      <div *ngIf="formA === true" class="ion-padding-vertical">
+       <ion-button type="button" style="--border-radius: 10px; text-transform: capitalize;" (click)="checkNext()">Next</ion-button>
+      </div>
+
+      <div *ngIf="formA === false" class="ion-padding-vertical">
+        <ion-button type="button" style="--border-radius: 10px; text-transform: capitalize;" (click)="checkBack()">Back</ion-button>
+        <ion-button type="submit" style="--border-radius: 10px; text-transform: capitalize;">Submit</ion-button>
+      </div>
+    </form>
+
+    <!-- <form *ngIf="formA" class="ion-padding-vertical">
+    
+
+      <ion-item mode="md" class="item-custom">
+        <ion-input mode="md"  placeholder="Date" class="input-custom" type="text" readonly="true" [(ngModel)]="cab_date"> </ion-input>
+        <div style="width:auto;display:flex;align-items: center;">
+          <ion-buttons>
+            <ion-button color="primary" (click)="dateSelectModal('cab_date')">
+              <ion-icon slot="icon-only" name="calendar-number-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </ion-item>
+      <br>
+
+      <ion-item mode="md" class="item-custom" (click)="timeSelectModal('cab_time')">
+        <ion-input mode="md"  placeholder="Time"  class="input-custom" type="text" readonly="true" [(ngModel)]="cab_time"> </ion-input>
+        <div style="width:auto;display:flex;align-items: center;">
+          <ion-buttons>
+            <ion-button color="primary">
+              <ion-icon slot="icon-only" name="time"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </ion-item>
+      <br>
+
+      <ion-item mode="md" class="item-custom">
+      <ion-select mode="ios" interface="popover" placeholder="Number of Persons" required style="width:100%;" [(ngModel)]="cab_person_num">
+        <ion-select-option value="1">1</ion-select-option>
+        <ion-select-option value="2">2</ion-select-option>
+        <ion-select-option value="3">3</ion-select-option>
+        <ion-select-option value="4">4</ion-select-option>
+      </ion-select>
+      </ion-item>
+      
+      <div class="ion-padding-vertical">
+        <ion-button type="submit" style="--border-radius: 10px; text-transform: capitalize;" (click)="formAsubmit()">Submit</ion-button>
+      </div>
+    </form>
+
+    <div *ngIf="formB">
+    <form>
+      <ion-item mode="md" class="item-custom">
+        <ion-label position="floating">
+          <ion-text style="color:#979797;">Pick Up</ion-text>
+        </ion-label>
+        <div style="width:100%;display:flex;align-items: center;">
+          <ion-input mode="md" class="input-custom" type="text"> </ion-input>
+        </div>
+      </ion-item>
+      <ion-item *ngIf="checked === false" mode="md" class="item-custom">
+        <ion-label position="floating">
+          <ion-text style="color:#979797;">Drop Off</ion-text>
+        </ion-label>
+        <div style="width:100%;display:flex;align-items: center;">
+          <ion-input mode="md" class="input-custom" type="text"> </ion-input>
+        </div>
+      </ion-item>
+    </form>
+    <ion-item lines="none" class="ion-margin-top" style="--padding-start:0px;">
+      <ion-checkbox mode="ios"  [(ngModel)]="checked"></ion-checkbox>
+      <ion-label>Different Dropoff Location?</ion-label>
+    </ion-item>
+    <div class="ion-padding-vertical">
+      <ion-button type="submit" style="--border-radius: 10px; text-transform: capitalize;" (click)="formBsubmit()">Submit</ion-button>
+    </div>
+    </div> -->
+
+    </div>
+    
+</div>

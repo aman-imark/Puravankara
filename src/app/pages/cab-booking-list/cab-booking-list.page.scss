@@ -1,0 +1,24 @@
+
+ion-chip {
+    --background: transparent;
+    --color: transparent;
+    margin: 0px;
+    min-height: 52px;
+    ion-avatar{
+        height:2.8em;
+        width:2.8em;
+    }
+    ion-label{
+        h3{
+            font-size:15px !important;
+            color:#333;
+        }
+        p{
+            font-size:10px !important; display: inline;
+            background: #EBFEDB;color: #39910E;
+            border-radius:4px; padding: 2.5px 8px;
+        }
+        
+        
+    }
+}

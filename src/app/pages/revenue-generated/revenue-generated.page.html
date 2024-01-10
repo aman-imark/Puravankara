@@ -1,0 +1,135 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title size="small">Revenue Generated</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="primary" [routerLink]="['/notifications']">
+        <ion-icon slot="icon-only" name="notifications"></ion-icon>
+      </ion-button>&nbsp;
+      <ion-menu-button color="primary"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    <br>
+    <ion-toolbar style="--background: #E2F1FF;width:80%;margin:auto;padding:15px 10px;border-radius:10px;text-align:center;">
+      <ion-text style="display: block;color:#044584;font-weight:600;">Total Revenue</ion-text>
+      <ion-text style="display: block;color:#044584 !important;margin-top:4px;margin-bottom:0px;
+                       font-size:28px;letter-spacing: 1px;">INR {{totalRevenue !== null ? (totalRevenue) : '0.00'}}</ion-text>
+    </ion-toolbar>
+
+    <div class="ion-text-center ion-margin-bottom ion-margin-top">
+      <div class="ion-margin-top ion-margin-bottom" style="width: 68%;margin: auto;border: 1pt solid#E1E1E1;border-radius:10px;">
+        <ion-select class="custom-select" mode="ios" value="{{recordPeriod}}" [interfaceOptions]="custom-select"  interface="popover" (ionChange)="handleChange($event)" style="font-size: 14px;">
+          <ion-select-option mode="ios" value="3months">Revenue Last 3 Months</ion-select-option>
+          <ion-select-option mode="ios" value="6months">Revenue Last 6 Months</ion-select-option>
+          <ion-select-option mode="ios" value="1year">Revenue Last 1 Year</ion-select-option>
+        </ion-select>
+      </div> 
+    </div>
+  
+    <h1 class="ion-text-center" style="letter-spacing: 1px;">INR {{otherRevenue !== null ? (otherRevenue) : '0.00'}}</h1>
+
+    <div *ngIf="revenueData?.length === 0" style="position: absolute;top: 50%; left: 50%; transform: translate(-50%, -50%);">
+      <p style="opacity: 0.5;">No Data Found!</p>
+    </div>
+
+    <div class="ion-padding-top ion-padding-bottom">
+    <div id="chart">
+      <apx-chart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [dataLabels]="chartOptions.dataLabels"
+        [plotOptions]="chartOptions.plotOptions"
+        [responsive]="chartOptions.responsive"
+        [xaxis]="chartOptions.xaxis"
+        [legend]="chartOptions.legend"
+        [fill]="chartOptions.fill"
+      ></apx-chart>
+    </div>
+    </div>
+
+   
+    <div class="ion-padding"> 
+      <ion-item *ngFor="let cty of revenueData" mode="md" lines="none" class="custom-itm ion-margin-bottom" (click)="goto_revenueLocation(cty.id, cty.city_name)">
+        <ion-label style="position: relative;">
+          <div class="rev-class" [ngClass]="{
+            'bg-1' : cty.id === 1, 
+            'bg-2' : cty.id == 2,          
+            'bg-3' : cty.id == 3, 
+            'bg-4' : cty.id == 4, 
+            'bg-5' : cty.id == 5
+           }"></div>
+
+          <div style="display:inline-block;margin-left:12px;">
+            <p>{{cty.city_name}}</p>
+            <h2 style="font-weight:600px !important;">INR {{cty.total !== null ? (cty.total) : '0.00'}}</h2>
+          </div>
+        </ion-label>
+        <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+      </ion-item>
+
+        <!-- <ion-item mode="md" lines="none" class="custom-itm" (click)="goto_revenueLocation('Bengaluru')">
+          <ion-label style="position: relative;">
+            <div style="display:inline-block;position: relative;top: -12px;height: 20px;width: 20px;background: #8F5EE5;"></div>
+            <div style="display:inline-block;margin-left:12px;">
+              <p>Bengaluru</p>
+              <h2>INR 10,19,53,125</h2>
+            </div>
+          </ion-label>
+          <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+        </ion-item> <br>
+
+        <ion-item mode="md" lines="none" class="custom-itm" (click)="goto_revenueLocation('Pune')">
+          <ion-label style="position: relative;">
+            <div style="display:inline-block;position: relative;top: -12px;height: 20px;width: 20px;background: #6FAC46;"></div>
+            <div style="display:inline-block;margin-left:12px;">
+              <p>Pune</p>
+              <h2>INR 10,19,53,125</h2>
+            </div>
+          </ion-label>
+          <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+        </ion-item> <br>
+
+        <ion-item mode="md" lines="none" class="custom-itm" (click)="goto_revenueLocation('Mumbai')">
+          <ion-label style="position: relative;">
+            <div style="display:inline-block;position: relative;top: -12px;height: 20px;width: 20px;background: #F1C338;"></div>
+            <div style="display:inline-block;margin-left:12px;">
+              <p>Mumbai</p>
+              <h2>INR 10,19,53,125</h2>
+            </div>
+          </ion-label>
+          <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+        </ion-item> <br>
+
+
+        <ion-item mode="md" lines="none" class="custom-itm" (click)="goto_revenueLocation('Chennai')">
+          <ion-label style="position: relative;">
+            <div style="display:inline-block;position: relative;top: -12px;height: 20px;width: 20px;background: #044584;"></div>
+            <div style="display:inline-block;margin-left:12px;">
+              <p>Chennai</p>
+              <h2>INR 10,19,53,125</h2>
+            </div>
+          </ion-label>
+          <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+        </ion-item> <br>
+
+        <ion-item mode="md" lines="none" class="custom-itm" (click)="goto_revenueLocation('Kochi')">
+          <ion-label style="position: relative;">
+            <div style="display:inline-block;position: relative;top: -12px;height: 20px;width: 20px;background: #EC7C30;"></div>
+            <div style="display:inline-block;margin-left:12px;">
+              <p>Kochi</p>
+              <h2>INR 10,19,53,125</h2>
+            </div>
+          </ion-label>
+          <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+        </ion-item> <br> -->
+
+    </div>
+
+
+</ion-content>

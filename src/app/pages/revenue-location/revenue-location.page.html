@@ -1,0 +1,230 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{location_name}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="primary" [routerLink]="['/notifications']">
+        <ion-icon slot="icon-only" name="notifications"></ion-icon>
+      </ion-button>&nbsp;
+      <ion-menu-button color="primary"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <br>
+  <ion-toolbar style="--background: #E2F1FF;width:80%;margin:auto;padding:15px 10px;border-radius:10px;text-align:center;">
+    <ion-text style="display: block;color:#044584;font-weight:600;">Total Revenue</ion-text>
+    <ion-text style="display: block;color:#044584 !important;margin-top:4px;margin-bottom:0px;
+                     font-size:28px;letter-spacing: 1px;">INR {{otherRevenue !== null ? (otherRevenue) : '0.00'}}</ion-text>
+  </ion-toolbar>
+
+
+  
+  <div *ngIf="revenueData?.length === 0" style="position: absolute;top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <p style="opacity: 0.5;">No Data Found!</p>
+  </div>
+
+  <div *ngIf="revenueData?.length >= 1" class="ion-padding-top">
+  <ion-grid class="ion-no-padding">
+    <ion-row class="custom-padding" style="background:#044584;color:#fff;">
+      <ion-col size="5.3">Invoice No</ion-col>
+      <ion-col size="5">Customer Name</ion-col>
+    </ion-row>
+
+
+    <ion-row *ngFor="let rvd of revenueData; let i = index;  let even = even; let odd = odd"  id="{{i}}"  [ngClass]="{ 'odd-bg': odd, 'even-bg': even }" class="custom-padding">
+      <ion-row>
+      <ion-col size="5.3">
+        <ion-label class="h-f-w">
+          <h3>{{i+1}}.&nbsp;{{rvd.invoice_id}}</h3>
+        </ion-label>
+      </ion-col>
+      <ion-col size="5">
+        <ion-label class="h-f-w">
+          <h3>{{rvd.firstname}}&nbsp;{{rvd.lastname}}</h3>
+        </ion-label>
+      </ion-col>
+      <ion-col size="1.7" class="ion-text-end"> 
+          <ion-buttons *ngIf="rvd.show === false">
+             <ion-button fill="solid"  class="view-btn" (click)="viewClicked(i)">View</ion-button> 
+          </ion-buttons> 
+      </ion-col>
+      </ion-row>
+
+      <ion-row  *ngIf="rvd.show === true" class="ion-padding-vertical">
+        <ion-col size="6">
+          <ion-item lines="none" class="ion-no-padding" style="--background:transparent;">
+            <ion-avatar slot="start">
+              <img alt="Silhouette of a person's head" [src]="rvd.image" />
+            </ion-avatar>
+            <ion-label class="h-f-w"><h3>{{rvd.name}}</h3></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="4.5">
+          <ion-item lines="none" class="ion-no-padding" style="--background:transparent;">
+            <ion-label class="h-f-w"><h3>{{rvd.city_name}}</h3></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="1.5">
+          <ion-buttons>
+            <ion-button (click)="closeClicked(i)">
+              <ion-icon slot="icon-only" name="close-sharp"></ion-icon>
+            </ion-button> 
+          </ion-buttons> 
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-label class="icon-text-label"><ion-icon name="mail"></ion-icon>&nbsp;&nbsp;<h3>{{rvd.email}}</h3></ion-label>
+        </ion-col>
+        <ion-col size="6">
+          <ion-label class="icon-text-label"><ion-icon name="call"></ion-icon>&nbsp;&nbsp;<h3>{{rvd.mobile}}</h3></ion-label>
+        </ion-col>
+        <ion-col size="6" *ngIf="rvd.dob">
+          <ion-label class="icon-text-label"><ion-icon name="business"></ion-icon>&nbsp;&nbsp;<h3>{{rvd.dob}}</h3></ion-label>
+        </ion-col>
+        <ion-col size="6" *ngIf="rvd.company_number">
+          <ion-label class="icon-text-label"><ion-icon name="business"></ion-icon>&nbsp;&nbsp;<h3>{{rvd.company_number}}</h3></ion-label>
+        </ion-col>
+        <ion-col size="6">
+          <ion-label class="icon-text-label">INR:&nbsp;&nbsp;<h3>{{rvd.price !== null ? rvd.price : '0.00'}}</h3></ion-label>
+        </ion-col>
+        <ion-col size="12" style="padding-top:10px;">
+          <ion-label>
+            <p>Lead by: {{rvd.leadby !== null ? rvd.leadby : 'unknown'}}</p>
+            <p>Brand Name: {{rvd.brand_name !== null ? rvd.brand_name : 'unknown'}}</p>
+          </ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-row>
+
+
+    <!-- <ion-accordion-group class="custom-accorion">
+      <ion-accordion *ngFor="let rvd of revenueData | slice:0:2" [value]="rvd.sn">
+        <ion-item slot="header" lines="none">
+          <ion-row>
+            <ion-col size="5.5">
+              <ion-label class="h-f-w">
+                <h3>{{rvd.sn}}.&nbsp;{{rvd.invoiceNo}}</h3>
+              </ion-label>
+            </ion-col>
+            <ion-col size="6.5">
+              <ion-label class="h-f-w">
+                <h3>{{rvd.customerName}}</h3>
+              </ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+        <div class="ion-padding-horizontal" slot="content">
+          <ion-row class="ion-padding-bottom">
+            <ion-col size="6">
+              <ion-item lines="none" class="ion-no-padding">
+                <ion-avatar slot="start">
+                  <img alt="Silhouette of a person's head" [src]="rvd.userData.avatarImg" />
+                </ion-avatar>
+                <ion-label class="h-f-w"><h3>{{rvd.userData.name}}</h3></ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6">
+              <ion-label class="h-f-w"><h3>{{rvd.userData.city}}</h3></ion-label>
+            </ion-col>
+            <ion-col size="6">
+              <ion-label class="icon-text-label"><ion-icon name="mail"></ion-icon>&nbsp;&nbsp;<h3>{{rvd.userData.email}}</h3></ion-label>
+            </ion-col>
+            <ion-col size="6">
+              <ion-label class="icon-text-label"><ion-icon name="call"></ion-icon>&nbsp;&nbsp;<h3>{{rvd.userData.phone}}</h3></ion-label>
+            </ion-col>
+            <ion-col size="6">
+              <ion-label class="icon-text-label"><ion-icon name="business"></ion-icon>&nbsp;&nbsp;<h3>{{rvd.userData.otherA}}</h3></ion-label>
+            </ion-col>
+            <ion-col size="6">
+              <ion-label class="icon-text-label"><ion-icon name="business"></ion-icon>&nbsp;&nbsp;<h3>{{rvd.userData.otherB}}</h3></ion-label>
+            </ion-col>
+            <ion-col size="6">
+              <ion-label class="icon-text-label"><ion-icon name="mail"></ion-icon>&nbsp;&nbsp;<h3>{{rvd.userData.revenue}}</h3></ion-label>
+            </ion-col>
+            <ion-col size="12">
+              <ion-label class="h-f-w"><p>{{rvd.userData.leadBy}}</p></ion-label>
+            </ion-col>
+            <ion-col size="12">
+              <ion-label class="h-f-w"><p>{{rvd.userData.brandName}}</p></ion-label>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group> -->
+
+    <!-- <ion-row *ngFor="let rvd of revenueData; let i = index;  let even = even; let odd = odd"  id="{{rvd.sn}}" class="custom-padding"  [ngClass]="{ 'odd-bg': odd, 'even-bg': even }">
+      <ion-row>
+      <ion-col size="5.3">
+        <ion-label class="h-f-w">
+          <h3>{{rvd.sn}}.&nbsp;{{rvd.invoiceNo}}</h3>
+        </ion-label>
+      </ion-col>
+      <ion-col size="5">
+        <ion-label class="h-f-w">
+          <h3>{{rvd.customerName}}</h3>
+        </ion-label>
+      </ion-col>
+      <ion-col size="1.7" class="ion-text-end"> 
+          <ion-buttons *ngIf="rvd.show === false">
+             <ion-button fill="solid"  class="view-btn" (click)="viewClicked(i)">View</ion-button> 
+          </ion-buttons> 
+      </ion-col>
+      </ion-row>
+
+      <ion-row  *ngIf="rvd.show === true" class="ion-padding-vertical">
+          <ion-col size="6">
+            <ion-item lines="none" class="ion-no-padding" style="--background:transparent;">
+              <ion-avatar slot="start">
+                <img alt="Silhouette of a person's head" [src]="rvd.userData.avatarImg" />
+              </ion-avatar>
+              <ion-label class="h-f-w"><h3>{{rvd.userData.name}}</h3></ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="4.5">
+            <ion-item lines="none" class="ion-no-padding" style="--background:transparent;">
+              <ion-label class="h-f-w"><h3>{{rvd.userData.city}}</h3></ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="1.5">
+            <ion-buttons>
+              <ion-button (click)="closeClicked(i)">
+                <ion-icon slot="icon-only" name="close-sharp"></ion-icon>
+              </ion-button> 
+            </ion-buttons> 
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-label class="icon-text-label"><ion-icon name="mail"></ion-icon>&nbsp;&nbsp;<h3>{{rvd.userData.email}}</h3></ion-label>
+          </ion-col>
+          <ion-col size="6">
+            <ion-label class="icon-text-label"><ion-icon name="call"></ion-icon>&nbsp;&nbsp;<h3>{{rvd.userData.phone}}</h3></ion-label>
+          </ion-col>
+          <ion-col size="6">
+            <ion-label class="icon-text-label"><ion-icon name="business"></ion-icon>&nbsp;&nbsp;<h3>{{rvd.userData.otherA}}</h3></ion-label>
+          </ion-col>
+          <ion-col size="6">
+            <ion-label class="icon-text-label"><ion-icon name="business"></ion-icon>&nbsp;&nbsp;<h3>{{rvd.userData.otherB}}</h3></ion-label>
+          </ion-col>
+          <ion-col size="6">
+            <ion-label class="icon-text-label"><ion-icon name="mail"></ion-icon>&nbsp;&nbsp;<h3>{{rvd.userData.revenue}}</h3></ion-label>
+          </ion-col>
+          <ion-col size="12" style="padding-top:10px;">
+            <ion-label>
+              <p>{{rvd.userData.leadBy}}</p>
+              <p>{{rvd.userData.brandName}}</p>
+            </ion-label>
+          </ion-col>
+      </ion-row>
+    </ion-row> -->
+  </ion-grid>
+  </div>
+
+
+
+
+</ion-content>

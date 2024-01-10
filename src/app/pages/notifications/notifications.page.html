@@ -1,0 +1,54 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Notifications</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div *ngIf="notificationData?.length === 0" style="position: absolute;top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <p style="opacity: 0.5;">No Notification Found!</p>
+  </div>
+
+  
+  <ion-list *ngIf="notificationData?.length >= 1">
+  <ion-item button *ngFor="let ntd of notificationData">
+    <ion-avatar slot="start">
+      <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+    </ion-avatar>
+    <ion-label>
+      <h3>{{ntd.notification}}</h3>
+      <!-- <p>9 hours ago</p> -->
+    </ion-label>
+  </ion-item>
+  
+  
+  <!-- <ion-item button>
+    <ion-avatar slot="start">
+      <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+    </ion-avatar>
+    <ion-label>
+      <h3>Lorem Ipsum is simply dummy printing.</h3>
+      <p>9 hours ago</p>
+    </ion-label>
+  </ion-item>
+  <ion-item button>
+    <ion-avatar slot="start">
+      <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+    </ion-avatar>
+    <ion-label>
+      <h3>Lorem Ipsum is simply dummy printing.</h3>
+      <p>9 hours ago</p>
+    </ion-label>
+  </ion-item> -->
+
+
+  </ion-list>
+
+
+
+</ion-content>

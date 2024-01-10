@@ -1,0 +1,83 @@
+<ion-content [fullscreen]="true">
+  <ion-header class="ion-no-border">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button text="" defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="ion-text-start">Regions</ion-title>
+
+      <ion-buttons slot="end">
+        <ion-button color="primary" [routerLink]="['/add-region']">
+          <ion-icon name="add-sharp" class="icon-custom"></ion-icon>&nbsp;<ion-text color="dark" style="letter-spacing: 0;font-weight: 500;">Add Region</ion-text>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+
+
+  <div *ngIf="regionData?.length === 0" style="position: absolute;top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <p style="opacity: 0.5;">No Data Found!</p>
+  </div>
+
+
+  <div *ngIf="regionData?.length >= 1" class="ion-padding region">
+    <ion-accordion-group value="1">
+      <ion-accordion *ngFor="let rd of regionData" value="{{rd.id}}" class="ion-margin-bottom">
+        <ion-item slot="header" lines="none">
+          <ion-label style="font-weight:600;">{{rd.region_name}}</ion-label>
+        </ion-item>
+        <div class="ion-padding region-content" slot="content">
+          <ion-label>
+            <p>RERA No</p>
+            <h6>{{rd.rera_no}}</h6>
+          </ion-label> <br>
+          <ion-label>
+            <p>GST No</p>
+            <h6>{{rd.gst_no}}</h6>
+          </ion-label> <br>
+          <ion-label>
+            <p>MSME</p>
+            <h6>{{rd.msme}}</h6>
+          </ion-label> <br>
+          <ion-label>
+            <p>Member</p>
+            <h6>{{rd.name}}</h6>
+          </ion-label> <br>
+           <ion-toolbar mode="md">
+            <ion-button slot="start" class="iobtn-medium" style="--border-radius: 10px;width:44%;" (click)="viewMembersList()">View Members</ion-button>
+            <ion-button slot="end" class="iobtn-medium" style="--border-radius: 10px;width:44%;" (click)="viewLeadList()">View Leads</ion-button>
+           </ion-toolbar>
+        </div>
+      </ion-accordion>
+      <!-- <ion-accordion value="third">
+        <ion-item slot="header"  lines="none">
+          <ion-label style="font-weight:600;">Maharashtra</ion-label>
+        </ion-item>
+        <div class="ion-padding region-content" slot="content">
+          <ion-label>
+            <p>RERA No</p>
+            <h6>PRM/KA/RERA/1251/472/PR190204/002350</h6>
+          </ion-label> <br>
+          <ion-label>
+            <p>GST No</p>
+            <h6>07AAGFF2194N1Z1</h6>
+          </ion-label> <br>
+          <ion-label>
+            <p>MSME</p>
+            <h6>03RRAGFF2194RFD</h6>
+          </ion-label> <br>
+          <ion-label>
+            <p>Member</p>
+            <h6>Ravinder</h6>
+          </ion-label> <br>
+           <ion-toolbar>
+            <ion-button slot="start" class="iobtn-medium" style="--border-radius: 10px;width:44%;">View Members</ion-button>
+            <ion-button slot="end" class="iobtn-medium" style="--border-radius: 10px;width:44%;">View Leads</ion-button>
+           </ion-toolbar>
+        </div>
+      </ion-accordion> -->
+      </ion-accordion-group>
+  </div>
+
+</ion-content>

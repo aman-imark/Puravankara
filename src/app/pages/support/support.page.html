@@ -1,0 +1,81 @@
+
+<ion-content>
+  <ion-header class="ion-no-border">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button text="" defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <!-- <ion-title class="ion-text-start">Support</ion-title> -->
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card *ngIf="thankuCard === false" mode="ios">
+    <ion-card-header>
+      <ion-card-title style="font-size: 25px;">Welcome to our <br>Support page!</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <p>To get in touch with us, please fill out the form below with your name, email address, and a brief message outlining your inquiry or query. 
+      We will get back to you as soon as possible, typically within 24-48 hours.</p> <br>
+      <form [formGroup]="supportForm" (ngSubmit)="supportDataSubmit()">
+        <ion-item mode="md" class="item-custom">
+          <ion-label position="floating"><ion-text style="color:#979797;">Name</ion-text>
+            <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+          <ion-input mode="md" class="input-custom" type="text" name="name" formControlName="name"></ion-input>
+        </ion-item>
+        <div *ngIf="supportForm.get('name').invalid && (supportForm.get('name').dirty || supportForm.get('name').touched)">
+          <div *ngIf="supportForm.get('name').errors.required" class="text-danger">
+            Name is required!
+          </div>
+        </div>
+
+        <br>
+        <ion-item mode="md" class="item-custom">
+          <ion-label position="floating"><ion-text style="color:#979797;">Email Address</ion-text>
+            <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+          <ion-input mode="md" class="input-custom" type="email" name="email" formControlName="email"></ion-input>
+        </ion-item>
+        <div *ngIf="supportForm.get('email').invalid && (supportForm.get('email').dirty || supportForm.get('email').touched)">
+          <div *ngIf="supportForm.get('email').errors.required" class="text-danger">
+            Email Address is required!
+          </div>
+          <div *ngIf="supportForm.get('email').errors.email" class="text-danger">
+            Email Address is not valid!
+          </div>
+        </div>
+
+
+        <br>
+        <ion-item mode="md" class="item-custom">
+          <ion-label position="floating"><ion-text style="color:#979797;">Message</ion-text>
+            <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+          <ion-textarea mode="md" class="input-custom" type="text" name="message" formControlName="message" autoGrow="true"></ion-textarea>
+        </ion-item>
+        <div *ngIf="supportForm.get('message').invalid && (supportForm.get('message').dirty || supportForm.get('message').touched)">
+          <div *ngIf="supportForm.get('message').errors.required" class="text-danger">
+            Message is required!
+          </div>
+        </div>
+
+
+        <br><br>
+        <div class="ion-padding">
+          <ion-button type="submit" size="large" expand="block" style="--border-radius: 15px;">Submit</ion-button>
+        </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="thankuCard === true" mode="ios">
+    <ion-card-header>
+      <ion-card-title style="font-size: 25px;">Thank You!</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <p>Thank you for contacting us. We value your feedback and look forward to assisting you further.</p> <br>
+ 
+    </ion-card-content>
+  </ion-card>
+
+
+</ion-content>

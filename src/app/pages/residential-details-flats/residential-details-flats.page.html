@@ -1,0 +1,281 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="projectData?.city_name" class="ion-text-start">Flats in {{projectData?.city_name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+
+  <ion-card  mode="ios" class="card-A">
+  <ion-card-content  mode="ios" class="ion-no-padding ion-no-margin">
+      <div [ngStyle]="{'background-image': 'URL('+projectData?.flat_img+')'}" style="height:170px;
+            background-position: center;background-repeat: no-repeat;background-size: cover;background-color: #d3d3d3;"></div>
+
+      <ion-list id="main">
+      <ion-item lines="none">
+        <ion-label>
+          <h2>{{projectData?.name || 'unknown'}}</h2>
+          <p style="display: flex; align-items: center;margin-top:5px;"><ion-icon name="location-sharp"></ion-icon>&nbsp;
+            {{projectData?.address || 'unknown'}}</p>
+
+            <p *ngIf="projectData?.voucher" style="display: flex; align-items: center;margin-top:5px;">
+              Voucher:&nbsp;{{projectData?.voucher}}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-thumbnail slot="start">
+          <img src="assets/fA.png"/>
+        </ion-thumbnail>
+        <ion-label>
+           <p>Residential Apartments</p>
+           <h3>{{projectData?.residential_apartments || 'unknown'}}</h3>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-thumbnail slot="start">
+          <img src="assets/fB.png"/>
+        </ion-thumbnail>
+        <ion-label>
+           <p>Unit</p>
+           <h3>{{projectData?.unit || 'unknown'}}</h3>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-thumbnail slot="start">
+          <img src="assets/fC.png">
+        </ion-thumbnail>
+        <ion-label>
+           <p>Price</p>
+           <h3>{{projectData?.price || 'unknown'}}</h3>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-thumbnail slot="start">
+          <img src="assets/fD.png">
+        </ion-thumbnail>
+        <ion-label>
+           <p>Status</p>
+           <h3>{{projectData?.city_name || 'unknown'}}</h3>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-thumbnail slot="start">
+          <img src="assets/fE.png">
+        </ion-thumbnail>
+        <ion-label>
+           <p>Towers</p>
+           <h3>{{projectData?.towers || 'unknown'}}</h3>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="full" class="ion-padding-bottom">
+        <ion-thumbnail slot="start">
+          <img src="assets/fF.png">
+        </ion-thumbnail>
+        <ion-label>
+           <p>Floors</p>
+           <h3>{{projectData?.floors || 'unknown'}}</h3>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label class="ion-text-wrap ion-padding-bottom">
+          <div class="div_dynm" [innerHtml]="projectData?.discription"></div>
+          <p class="ion-padding-top">RERA NO: {{projectData?.rera_no || 'unknown'}}</p>
+          <p class="ion-padding-top">Development Size: {{projectData?.development_size || 'unknown'}}</p>
+          <p class="ion-padding-top">For more info visit <a [href]="projectData?.link">{{projectData?.link}}</a></p>
+          <p class="ion-padding-top">Possession Date: {{projectData?.possession_date || 'unknown'}}</p>
+        </ion-label>
+      </ion-item>
+      </ion-list>
+
+
+      <div id="plan">
+        <ion-item lines="none">
+          <ion-label>
+            <h2>Plan</h2>
+            <p>Floor plans</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-segment [(ngModel)]="segmentPlan" mode="ios" (ionChange)="onSegmentChanged($event)" class="ion-padding-horizontal">    
+          <ion-segment-button value="{{i+1}}" *ngFor="let pky of planData | keyvalue; let i=index;"><ion-text>{{pky.key | uppercase}}</ion-text></ion-segment-button>
+        </ion-segment>
+
+        <div *ngFor="let pdb of planDataB; let i=index;">
+            <div *ngIf="segmentPlan == (i+1)">
+              <div class="ion-margin" style="background: #F6F6F6;height:210px;
+                           border-radius:10px; display: flex; align-items: center; justify-content: center;">
+                  <div style="height:175px;"> <img [src]="pdb?.image" style="height:100%;"> </div>
+              </div>   
+              <!-- <div class="ion-margin" style="background: #F6F6F6;height:210px;
+                         border-radius:10px; display: flex; align-items: center; justify-content: center;">
+                  <div style="height:175px;"> <img src="assets/fP1.png" style="height:100%;"> </div>
+              
+              </div>  -->
+              <ion-item lines="none">
+                <ion-label>
+                  <p>Configuration Type 2BHK</p>
+                  <h3 *ngIf="pdb?.construction_type">{{pdb?.construction_type | uppercase}}</h3>
+                  <h3 *ngIf="!pdb?.construction_type">unknown</h3>
+               </ion-label>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-label>
+                  <p>Super Built-up Area</p>
+                  <h3 *ngIf="pdb?.area">{{pdb?.area + '&nbsp;SFT'}}</h3>
+                  <h3 *ngIf="!pdb?.area">unknown</h3>
+               </ion-label>
+              </ion-item>
+              <ion-item lines="full"  class="ion-padding-bottom">
+                <ion-label>
+                  <p>Price</p>
+                  <h3 *ngIf="pdb?.price">{{'₹&nbsp;' + pdb?.price + '&nbsp;Onwards'}}</h3>
+                  <h3 *ngIf="!pdb?.price">unknown</h3>
+               </ion-label>
+              </ion-item>
+            </div>  
+        </div>
+        <!-- <div [ngSwitch]="segmentPlan">
+          <div *ngSwitchCase="'1'">
+             <div class="ion-margin" style="background: #F6F6F6;height:210px;
+                         border-radius:10px; display: flex; align-items: center; justify-content: center;">
+                  <div style="height:175px;"> <img src="assets/fP1.png" style="height:100%;"> </div>
+              
+             </div>
+  
+             <ion-item lines="none">
+              <ion-label>
+                <p>Configuration Type 2BHK</p>
+                <h3>2BHK</h3>
+             </ion-label>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-label>
+                <p>Super Built-up Area</p>
+                <h3>1299 TO 1443 SFT</h3>
+             </ion-label>
+            </ion-item>
+            <ion-item lines="full"  class="ion-padding-bottom">
+              <ion-label>
+                <p>Price</p>
+                <h3>₹ 1.33 Cr Onwards*</h3>
+             </ion-label>
+            </ion-item>
+          </div>
+          <div *ngSwitchCase="'2'">
+             <h3 class="ion-text-center">3BHK active</h3>
+          </div>
+          <div *ngSwitchCase="'3'">
+             <h3 class="ion-text-center">Master Plan active</h3>
+          </div>
+        </div> -->
+        <br>
+      </div>
+  
+  
+      <div id="gallery">
+        <ion-item lines="none">
+          <ion-label>
+            <h2>Gallery</h2>
+          </ion-label>
+        </ion-item>
+        <div  *ngIf="galleryData?.length === 0">
+          <div class="ion-padding ion-text-center" style="background: #F6F6F6;"><p style="margin: 0px;">No Data Found!</p></div>
+        </div>
+        <ion-grid *ngIf="galleryData?.length >= 1">
+          <ion-row class="ion-padding-horizontal">
+            <ion-col size="6" *ngFor="let gly of galleryData" class="custom-col">
+              <div class="img-wrapper"><img [src]="gly"></div>
+            </ion-col>
+          </ion-row>         
+        </ion-grid>
+        <br>
+      </div>
+  
+  
+      <div id="videos">
+        <ion-item lines="none">
+          <ion-label>
+            <h2>Videos</h2>
+          </ion-label>
+        </ion-item>
+        <div  *ngIf="videosData?.length === 0">
+          <div class="ion-padding ion-text-center" style="background: #F6F6F6;"><p style="margin: 0px;">No Data Found!</p></div>
+        </div>
+
+        <ion-grid *ngIf="videosData?.length >= 1" style="background: #F6F6F6;padding: 0px;">
+        <ion-row style="background: #F6F6F6;padding: 0px;">
+          <ion-col size="12" *ngFor="let vdo of videosData" style="padding: 0px;">
+            <div class="ion-padding-top" style="height: 220px;width: 100%;">
+              <iframe [src]="domSanitizer.bypassSecurityTrustResourceUrl(vdo)" style="height:100%;width:100%;border-width:0px;" allowfullscreen="allowfullscreen"></iframe>
+            </div>
+          </ion-col>
+        </ion-row>
+        </ion-grid>
+        <br>
+      </div>
+
+
+      <div id="amenities">
+        <ion-item lines="none">
+          <ion-label>
+            <h2>Amenities</h2>
+          </ion-label>
+        </ion-item>
+        <ion-segment [(ngModel)]="segmentAmenities" mode="ios" class="ion-padding-horizontal">    
+            <ion-segment-button value="1" ><ion-text style="font-weight:500;">Outdoor</ion-text></ion-segment-button>
+            <ion-segment-button value="2"><ion-text style="font-weight:500;">Indoor</ion-text></ion-segment-button>
+        </ion-segment>
+        <div [ngSwitch]="segmentAmenities">
+          <ion-grid *ngSwitchCase="'1'">
+            <ion-row *ngIf="outdoorData?.length === 0">
+              <ion-col size="12" class="ion-padding-bottom ion-text-center"><p>No Data Found!</p></ion-col>
+            </ion-row>
+            <ion-row *ngIf="outdoorData?.length >= 1">
+              <ion-col size="6" *ngFor="let otd of outdoorData">
+                <ion-item lines="none" style="opacity: 0.9;--padding-start: 12px;--inner-padding-end: 0px;">
+                  <ion-thumbnail slot="start">
+                    <img alt="Silhouette of mountains" [src]="otd.image" />
+                  </ion-thumbnail>
+                  <ion-label class="ion-text-wrap">
+                     <h3>{{otd.name}}</h3>
+                  </ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-grid *ngSwitchCase="'2'">
+            <ion-row *ngIf="indoorData?.length === 0">
+              <ion-col size="12" class="ion-padding-bottom ion-text-center"><p>No Data Found!</p></ion-col>
+            </ion-row>
+            <ion-row *ngIf="indoorData?.length >= 1">
+              <ion-col size="6" *ngFor="let ind of indoorData">
+                <ion-item lines="none" style="opacity: 0.9;--padding-start: 12px;--inner-padding-end: 0px;">
+                  <ion-thumbnail slot="start">
+                    <img alt="Silhouette of mountains" [src]="ind.image" />
+                  </ion-thumbnail>
+                  <ion-label class="ion-text-wrap">
+                     <h3>{{ind.name}}</h3>
+                  </ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+
+        <ion-item lines="none" class="ion-padding-vertical">
+          <ion-label class="ion-text-wrap">
+              <ion-button class="iobtn-medium" expand="block" style="--border-radius: 12px;margin-bottom:14px;" (click)="downloadBrochure()">Download Brochure</ion-button>
+              <ion-button class="iobtn-medium" expand="block" style="--border-radius: 12px;" fill="outline" (click)="openShare()">Share</ion-button>
+          </ion-label>
+        </ion-item>
+      </div>
+  </ion-card-content>
+  </ion-card>
+
+</ion-content>

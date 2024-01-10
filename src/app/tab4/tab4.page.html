@@ -1,0 +1,106 @@
+<ion-header class="ion-border">
+  <ion-toolbar>
+    <ion-title>Payments</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+
+  <div *ngIf="paymentsData?.length === 0" style="width: 100%;text-align: center;position: absolute;top: 50%;left:50%;transform: translate(-50%, -50%);">
+    <p style="color: #666 !important;" class="ion-text-center">No Data Available</p>
+  </div>
+
+
+  <div *ngIf="paymentsData?.length >= 1">
+    <ion-card *ngFor="let pym of paymentsData" mode="ios" class="card-A">
+      <ion-card-content  mode="ios" class="ion-no-padding ion-no-margin">
+        <ion-list id="main">
+        <ion-item lines="none">
+          <ion-label>
+            <h2>{{pym.project_name || 'unknown'}}</h2>
+            <p style="display: flex; align-items: center;margin-top:5px;"><ion-icon name="location-sharp"></ion-icon>
+              &nbsp;{{pym.vendor_name || 'unknown'}}</p>
+          </ion-label>
+        </ion-item>
+  
+        <ion-item lines="none">
+          <ion-label>
+             <p>Vendor Id</p>
+             <h3>{{pym.vendor_id}}</h3>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+             <p>Vendor Inv Date</p>
+             <h3>{{pym.vendor_inv_date}}</h3>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+             <p>Booking Id</p>
+             <h3>{{pym.booking_id}}</h3>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+             <p>Booking Date</p>
+             <h3>{{pym.booking_date}}</h3>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+             <p>Company Code</p>
+             <h3>{{pym.company_code || 'unknown'}}</h3>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+             <p>Agreement Value</p>
+             <h3>{{pym.agreement_value || 'unknown'}}</h3>
+          </ion-label>
+        </ion-item>        
+        <ion-item lines="none">
+          <ion-label>
+             <p>Amount Paid</p>
+             <h3>{{pym.amount_paid || 'unknown'}}</h3>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+             <p>Balance Amt</p>
+             <h3>{{pym.balance_amt || 'unknown'}}</h3>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+             <p>Brokerage Amt</p>
+             <h3>{{pym.brokerage_amt || 'unknown'}}</h3>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+             <p>Brokerage Inv No</p>
+             <h3>{{pym.brokerage_inv_no || 'unknown'}}</h3>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+             <p>Brokerage Inv No</p>
+             <h3>{{pym.brokerage_inv_no || 'unknown'}}</h3>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label>
+             <p>Status</p>
+             <h3>{{pym.status || 'unknown'}}</h3>
+          </ion-label>
+        </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+    <br>
+  </div>
+
+</ion-content>

@@ -1,0 +1,133 @@
+
+<ion-content [fullscreen]="true">
+  <ion-header class="ion-no-border">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button text="" defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="ion-text-start">Add Region</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <div class="ion-padding-horizontal">
+  <form #regionForm="ngForm"  (ngSubmit)="onSubmitRegionForm(regionForm)">
+    
+    <ion-accordion-group value="states">
+      <ion-accordion value="states">
+        <ion-item slot="header" lines="full" class="item-custom"> 
+          <ion-label><ion-text style="color:#979797;">State</ion-text>
+          <ion-text style="color:#EF2727;">*</ion-text></ion-label> 
+        </ion-item>
+
+        <div class="inner" slot="content">
+            <div *ngIf="!stateSugData" style="display:flex; align-items:center;height:100px;justify-content: center;">
+              <div><ion-spinner name="crescent"></ion-spinner></div>
+            </div>
+
+            <div *ngIf="stateSugData?.length === 0" style="display:flex; align-items:center;height:100px;justify-content: center;">
+              <div><p>No State Data found!</p></div>
+            </div>
+           
+            <div *ngIf="stateSugData">
+            <!-- <ion-list *ngFor="let item of stateSugData | filterItems: searchTerm">  -->
+            <form #form1="ngForm">
+            <ion-item lines="none" *ngFor="let item of stateSugData" style="--min-height: 42px;">
+              <ion-label style="margin: 0px;font-size: 14px;">
+                <div style="display:flex;justify-content: space-between;color:#212529;font-weight:500;">
+                  <ion-text>{{item.name }}</ion-text>
+                </div>
+              </ion-label>
+              <ion-checkbox slot="end" style="margin: 0px;" [id]="item.id+'/'+item.name" [(ngModel)]="item.selected" name="{{item.id}}"></ion-checkbox>
+            </ion-item>
+            </form>
+            </div>            
+        </div>
+      </ion-accordion>
+
+      <!-- <ion-accordion value="company" *ngIf="userRole === 3">
+        <ion-item slot="header" lines="full" class="item-custom"> 
+          <ion-label><ion-text style="color:#979797;">Company</ion-text>
+          <ion-text style="color:#EF2727;">*</ion-text></ion-label> 
+        </ion-item>
+
+        <div class="inner" slot="content">
+            <div *ngIf="!companySugData" style="display:flex; align-items:center;height:100px;justify-content: center;">
+              <div><ion-spinner name="crescent"></ion-spinner></div>
+            </div>
+
+            <div style="display:flex; align-items:center;height:100px;justify-content: center;">
+              <div><p>No Company Data found!</p></div>
+            </div>
+            <div *ngIf="companySugData">
+            <form #form2="ngForm">
+            <ion-item lines="none" *ngFor="let item of companySugData" style="--min-height: 42px;">
+              <ion-label style="margin: 0px;font-size: 14px;">
+                <div style="display:flex;justify-content: space-between;color:#212529;font-weight:500;">
+                  <ion-text>{{item.name }}</ion-text>
+                </div>
+              </ion-label>
+              <ion-checkbox slot="end" style="margin: 0px;"></ion-checkbox>
+            </ion-item>
+            </form>
+            </div>
+        </div>
+      </ion-accordion> -->
+
+      <ion-accordion value="members">
+        <ion-item slot="header" lines="full" class="item-custom"> 
+          <ion-label><ion-text style="color:#979797;">Members</ion-text>
+          <ion-text style="color:#EF2727;">*</ion-text></ion-label> 
+        </ion-item>
+
+        <div class="inner" slot="content">
+            <div *ngIf="!memberSugData" style="display:flex; align-items:center;height:100px;justify-content: center;">
+              <div><ion-spinner name="crescent"></ion-spinner></div>
+            </div>
+
+            <div *ngIf="memberSugData?.length === 0" style="display:flex; align-items:center;height:100px;justify-content: center;">
+              <div><p>No Members Data found!</p></div>
+            </div>
+        
+            <div *ngIf="memberSugData">
+            <!-- <ion-list *ngFor="let item of stateSugData | filterItems: searchTerm">  -->
+            <form #form3="ngForm">
+            <ion-item lines="none" *ngFor="let item of memberSugData" style="--min-height: 42px;">
+              <ion-label style="margin: 0px;font-size: 14px;">
+                <div style="display:flex;justify-content: space-between;color:#212529;font-weight:500;">
+                  <ion-text>{{item.name }}</ion-text>
+                </div>
+              </ion-label>
+              <ion-checkbox slot="end" style="margin: 0px;" [id]="item.id+'/'+item.name" [(ngModel)]="item.selected" name="{{item.id}}"></ion-checkbox>
+            </ion-item>
+            </form>
+            </div>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!-- company_id -->
+
+
+
+    <!-- <ion-item mode="md" class="item-custom">
+
+      <ion-input mode="md" class="input-custom" type="text" [(ngModel)]="filterMember"  name="filterMember"
+                 (ionInput)="memberInputInput()" (ionBlur)="memberInputBlur()"></ion-input>
+      <ion-input hidden mode="md" readonly  type="text" [(ngModel)]="member_id"  name="member_id" required></ion-input>
+    </ion-item>
+      <div *ngIf="memberSugData && showMemberSug">
+        <ion-item class="ion-no-padding" *ngFor="let msd of memberSugData | filter: filterMember" (click)="memberAutoCompleteValue(msd.id, msd.name)">
+          <ion-label>{{msd.name}}</ion-label>
+        </ion-item>
+      </div> -->
+
+   
+    <br>
+    <div class="ion-padding-top ion-padding-bottom">
+      <ion-button type="button" size="large" expand="block" (click)="regionForm_Submit()" style="--border-radius: 15px;">Submit</ion-button>
+    </div>  
+    </form>
+  </div>
+  
+</ion-content>

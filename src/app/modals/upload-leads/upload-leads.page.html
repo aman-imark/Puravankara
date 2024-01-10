@@ -1,0 +1,52 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="padding:10px 2px 5px;">
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="dismiss()">
+         <ion-icon slot="icon-only" name="close-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<div class="ion-text-center">
+
+  
+  <ion-card id="select-file" (change)="onFileSelected($event)" mode="ios" style="width: 150px;margin: auto;
+                                  margin-top:10px;margin-bottom:10px;border-radius: 15px;">
+    <input id="file-input" type="file" accept=".csv" style="display: none;">
+    <ion-card-content mode="ios">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="41.595" height="32.18" viewBox="0 0 41.595 32.18">
+            <g id="noun-upload-2179355" transform="translate(-69.005 -66.059)">
+              <path id="Path_3170" data-name="Path 3170" d="M103.427,266.211H76.178A6.181,6.181,0,0,1,70,260.042v-10.22a.851.851,0,0,1,1.7,0v10.22a4.478,4.478,0,0,0,4.471,4.471h27.249a4.478,4.478,0,0,0,4.471-4.471v-10.22a.851.851,0,0,1,1.7,0v10.22a6.181,6.181,0,0,1-6.173,6.169Z" transform="translate(0 -168.972)" stroke="#000" stroke-width="2"/>
+              <path id="Path_3171" data-name="Path 3171" d="M338.368,93.928a.922.922,0,0,1,.792.93v17.315a.926.926,0,0,1-.792.934.891.891,0,0,1-.97-.879V94.807a.891.891,0,0,1,.97-.879Z" transform="translate(-248.486 -24.889)" stroke="#000" stroke-width="2"/>
+              <path id="Path_3172" data-name="Path 3172" d="M249.016,67.3a.555.555,0,0,1,.768,0l7,6.581a.891.891,0,0,1-1.224,1.295l-6.145-5.785-6.145,5.8a.9.9,0,0,1-1.224-1.311Z" transform="translate(-159.61)" stroke="#000" stroke-width="2"/>
+            </g>
+          </svg>
+          <p color="dark">Upload Leads</p>
+        </div>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-note *ngIf="!isCsvFile" style="font-size:12px;"><ion-text style="color:#EF2727;">*</ion-text><ion-text>(Upload only csv format)</ion-text></ion-note>
+  <ion-note *ngIf="csvFileName"><ion-text color="success">{{csvFileName}}</ion-text><ion-text *ngIf="csvFileSize" style="font-size: 12px;">({{csvFileSize + 'B'}})</ion-text></ion-note>
+ 
+ 
+  <input type="file" (change)="onFileSelectedJJ($event)">
+  <div class="ion-padding">
+    <ion-button style="--border-radius:10px;" type="button" (click)="csvFileDataUpload2()">Submit</ion-button>
+  </div>
+  <!-- <div class="ion-padding">
+    <ion-button [disabled]="!isCsvFile" style="--border-radius:10px;" type="button" (click)="csvFileDataUpload()">Submit</ion-button>
+  </div> -->
+
+  <div>
+    <ion-button fill="outline" style="--border-radius:10px;" (click)="csvFormatDownload()">
+      <ion-icon name="download-outline"></ion-icon>&nbsp;Download CSV Format
+    </ion-button> 
+  </div>
+  <br>
+</div>

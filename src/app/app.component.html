@@ -1,0 +1,73 @@
+<!-- <ion-app>
+  <ion-router-outlet></ion-router-outlet>
+</ion-app> -->
+
+
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ion-menu mode="ios" menuId="guest" contentId="main-content" type="overlay"  swipeGesture="false" side="end">
+      <ion-header>
+        <ion-toolbar color="primary">        
+          <ion-item lines="none"  detail="false">
+            <ion-avatar slot="start" class="item-avatar">
+              <img src="https://ionicframework.com/docs/img/demos/avatar.svg"/>
+            </ion-avatar>
+            <ion-label>
+              <h2><ion-text color="light">{{userName}}</ion-text></h2>
+              <p style="white-space: break-spaces;"><ion-text color="light">{{userEmail}}</ion-text></p>
+              <p><ion-text color="light">{{userRoleText}}&nbsp;({{userRole}})</ion-text></p>
+            </ion-label>
+          </ion-item>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content [scrollEvents]="true">
+        <div>
+        <!-- <ion-item button lines="none">
+          <ion-label>About Us</ion-label>
+        </ion-item> -->
+        <ion-item button lines="none" (click)="goto_faqs()">
+          <ion-label style="letter-spacing: 0px;">FAQ's</ion-label>
+        </ion-item>
+        <ion-item button lines="none" (click)="goto_support()">
+          <ion-label style="letter-spacing: 0px;">Support</ion-label>
+        </ion-item>
+        <ion-item button lines="none" (click)="goto_terms()" detail="false">
+          <!-- <ion-label style="letter-spacing: 0px;display: flex;align-items: center;">            
+            Terms and Conditions&nbsp;&nbsp;<ion-icon name="download" color="primary" style="font-size: 20px"></ion-icon>          
+          </ion-label>  -->
+          <ion-icon slot="start" name="download" color="primary" style="margin-inline-end: 10px;"></ion-icon>
+          <ion-label>Terms and Conditions</ion-label>
+        </ion-item>
+        <!-- <ion-item button lines="none" (click)="goto_termsB()">
+          <ion-label>Terms and Conditions</ion-label>
+        </ion-item> -->
+        <!-- <ion-item button lines="none" (click)="goto_detailVerify()">
+          <ion-label>Detail Verify</ion-label>
+        </ion-item> -->
+        <!-- <ion-item button lines="none" (click)="goto_memberList()">
+          <ion-label>Members List</ion-label>
+        </ion-item>
+        <ion-item button lines="none" (click)="goto_memberListB()">
+          <ion-label>Members List B</ion-label>
+        </ion-item>
+        <ion-item button lines="none" (click)="goto_cabBookingList()">
+          <ion-label>Cab Booking List</ion-label>
+        </ion-item> -->
+        </div>
+      </ion-content>
+      <ion-footer class="ion-padding-vertical">
+        <div style="height: 10vh;text-align:center;"><img src="assets/img/splash/splashA.png" style="height:100%; margin-left: -1px;"></div>
+
+        <ion-item lines="none" detail="false"  (click)="ask_logoutConfirm()">
+          <ion-icon slot="start" name="log-out-outline" color="danger" style="margin-inline-end: 10px;"></ion-icon>
+          <ion-label>Log Out</ion-label>
+        </ion-item>
+      </ion-footer>
+    </ion-menu>
+
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>
+
+

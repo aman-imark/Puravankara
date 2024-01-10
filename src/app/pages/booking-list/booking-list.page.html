@@ -1,0 +1,148 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Booking List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+
+  <div *ngIf="allBookingData?.length === 0" style="position: absolute;top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <p style="opacity: 0.5;">No Data Found!</p>
+  </div>
+
+  <!-- <div *ngIf="allBookingData?.length >= 1">
+  <ion-grid class="ion-no-padding">
+    <ion-row class="custom-padding" style="background:#044584;color:#fff;">
+      <ion-col size="5.3">Invoice No</ion-col>
+      <ion-col size="5">Customer Name</ion-col>
+    </ion-row>
+
+    <ion-row *ngFor="let bkd of allBookingData; let i = index;  let even = even; let odd = odd"  id="{{i}}" class="custom-padding"  [ngClass]="{ 'odd-bg': odd, 'even-bg': even }">
+      <ion-row>
+      <ion-col size="5.3">
+        <ion-label class="h-f-w">
+          <h3>{{i+1}}.&nbsp;{{bkd.invoice_id}}</h3>
+        </ion-label>
+      </ion-col>
+      <ion-col size="5">
+        <ion-label class="h-f-w">
+          <h3>{{bkd.firstname}}&nbsp;{{bkd.lastname}}</h3>
+        </ion-label>
+      </ion-col>
+      <ion-col size="1.7" class="ion-text-end"> 
+          <ion-buttons *ngIf="bkd.show === false">
+             <ion-button fill="solid"  class="view-btn" (click)="viewClicked(i)">View</ion-button> 
+          </ion-buttons> 
+      </ion-col>
+      </ion-row>
+
+      <ion-row  *ngIf="bkd.show === true" class="ion-padding-vertical">
+          <ion-col size="6">
+            <ion-item lines="none" class="ion-no-padding" style="--background:transparent;">
+              <ion-avatar slot="start">
+                <img alt="Silhouette of a person's head" [src]="bkd.image" />
+              </ion-avatar>
+              <ion-label class="h-f-w"><h3>{{bkd.name}}</h3></ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="4.5">
+            <ion-item lines="none" class="ion-no-padding" style="--background:transparent;">
+              <ion-label class="h-f-w"><h3>{{bkd.city_name}}</h3></ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="1.5">
+            <ion-buttons>
+              <ion-button (click)="closeClicked(i)">
+                <ion-icon slot="icon-only" name="close-sharp"></ion-icon>
+              </ion-button> 
+            </ion-buttons> 
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-label class="icon-text-label"><ion-icon name="mail"></ion-icon>&nbsp;&nbsp;<h3>{{bkd.email}}</h3></ion-label>
+          </ion-col>
+          <ion-col size="6">
+            <ion-label class="icon-text-label"><ion-icon name="call"></ion-icon>&nbsp;&nbsp;<h3>{{bkd.mobile}}</h3></ion-label>
+          </ion-col>
+          <ion-col size="6" *ngIf="bkd.dob">
+            <ion-label class="icon-text-label"><ion-icon name="business"></ion-icon>&nbsp;&nbsp;<h3>{{bkd.dob}}</h3></ion-label>
+          </ion-col>
+          <ion-col size="6" *ngIf="bkd.company_number">
+            <ion-label class="icon-text-label"><ion-icon name="business"></ion-icon>&nbsp;&nbsp;<h3>{{bkd.company_number}}</h3></ion-label>
+          </ion-col>
+          <ion-col size="6">
+            <ion-label class="icon-text-label">INR:&nbsp;&nbsp;<h3>{{bkd.price !== null ? bkd.price : '0.00'}}</h3></ion-label>
+          </ion-col>
+          <ion-col size="12" style="padding-top:10px;">
+            <ion-label>
+              <p>Lead by: {{bkd.leadby !== null ? bkd.leadby : 'unknown'}}</p>
+              <p>Brand Name: {{bkd.brand_name !== null ? bkd.brand_name : 'unknown'}}</p>
+            </ion-label>
+          </ion-col>
+      </ion-row>
+    </ion-row>
+  </ion-grid>
+  </div> -->
+
+  <div *ngIf="allBookingData?.length >= 1">
+    <ion-grid class="ion-no-padding">
+      <ion-row *ngFor="let bkd of allBookingData; let i = index;  let even = even; let odd = odd"  id="{{i}}" class="custom-padding"  [ngClass]="{ 'odd-bg': odd, 'even-bg': even }">
+        <ion-row>
+        <ion-col size="4">
+          <ion-label class="h-f-w">
+            <h3>{{i+1}}.&nbsp;&nbsp;{{bkd.vendor_id}}</h3>
+          </ion-label>
+        </ion-col>
+        <ion-col size="6.3">
+          <ion-label class="h-f-w">
+            <h3>{{bkd.vendor_name}}</h3>
+          </ion-label>
+        </ion-col>
+        <ion-col size="1.7" class="ion-text-end"> 
+            <ion-buttons *ngIf="bkd.show === false">
+               <ion-button fill="solid"  class="view-btn" (click)="viewClicked(i)">View</ion-button> 
+            </ion-buttons> 
+        </ion-col>
+        </ion-row>
+
+        <ion-row  *ngIf="bkd.show === true" class="ion-padding-vertical">
+            <ion-col size="10">
+              <ion-item lines="none" class="ion-no-padding" style="--background:transparent;">
+                <ion-label class="h-f-w"><h3>Project Name: {{bkd.project_name}}</h3></ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col size="2">
+              <ion-buttons>
+                <ion-button (click)="closeClicked(i)">
+                  <ion-icon slot="icon-only" name="close-sharp"></ion-icon>
+                </ion-button> 
+              </ion-buttons> 
+            </ion-col>
+
+
+            <ion-col size="12">
+              <ion-item lines="none" class="ion-no-padding" style="--background:transparent;">
+                <ion-label style="margin: 0px;"><h3>Booking Date:&nbsp;{{bkd.booking_date}}</h3></ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12">
+              <ion-item lines="none" class="ion-no-padding" style="--background:transparent;">
+                <ion-label style="margin: 0px;"><h3>Agreement Value:&nbsp;{{bkd.agreement_value}}</h3></ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" *ngIf="bkd.vendor_inv_date">
+              <ion-item lines="none" class="ion-no-padding" style="--background:transparent;">
+                <ion-label style="margin: 0px;"><h3>Vendor Inv Date:&nbsp;{{bkd.vendor_inv_date}}</h3></ion-label>
+              </ion-item>
+            </ion-col>
+        </ion-row>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+
+</ion-content>

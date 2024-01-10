@@ -1,0 +1,453 @@
+<ion-content [fullscreen]="true">
+  <ion-header class="ion-no-border">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button [defaultHref]="['/login']"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Sign up</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <div class="ion-padding">
+
+    <form [formGroup]="signupForm" (ngSubmit)="user_signup()">
+      <!-- <ion-item mode="md" class="item-custom">
+        <ion-label position="floating"><ion-text style="color:#979797;">Proprietor/Organization</ion-text><ion-text style="color:#EF2727;">*</ion-text></ion-label>
+        <div style="width:100%;display:flex;align-items: center;">
+          <ion-input mode="md" class="input-custom" type="text"> </ion-input> 
+          <ion-buttons>
+            <ion-button color="dark">
+              <ion-icon slot="icon-only" name="chevron-down"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </ion-item> -->
+
+
+
+      <ion-item *ngIf="role === '1'" mode="md" class="item-custom">
+        <ion-input mode="md" class="input-custom" type="text" name="type_name" readonly value="Proprietor/Organization"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="role === '2'" mode="md" class="item-custom">
+        <ion-input mode="md" class="input-custom" type="text" name="type_name" readonly value="CP Representative"></ion-input>
+      </ion-item>
+      <br>
+
+
+      <div *ngIf="role === '2'">
+      <ion-item mode="md" class="item-custom">
+        <ion-select placeholder="Select Company" formControlName="company_name" name="company_name" required style="width:100%;font-size: 14px;">
+          <ion-select-option *ngFor="let org of orgLists" [value]="org.id">{{org.company_name}}</ion-select-option>
+        </ion-select>
+      </ion-item> 
+      <div *ngIf="signupForm.get('company_name').invalid && (signupForm.get('company_name').dirty || signupForm.get('company_name').touched)">
+        <div *ngIf="signupForm.get('company_name').errors.required" class="text-danger">
+          Please select your Company!
+        </div>        
+      </div>
+      <br>
+    </div>
+
+
+
+      <div *ngIf="role === '1'">
+      <ion-item mode="md" class="item-custom">
+      <ion-label position="floating"><ion-text style="color:#979797;">Company Name</ion-text>
+        <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+      <ion-input mode="md" class="input-custom" type="text" name="company_name" formControlName="company_name" required></ion-input>
+      </ion-item>
+      <div *ngIf="signupForm.get('company_name').invalid && (signupForm.get('company_name').dirty || signupForm.get('company_name').touched)">
+        <div *ngIf="signupForm.get('company_name').errors.required" class="text-danger">
+          Company name is required!
+        </div>        
+      </div>
+      <br>
+      </div>
+
+
+
+      <ion-item mode="md" class="item-custom">
+        <ion-label *ngIf="role === '1'" position="floating"><ion-text style="color:#979797;">Contact Person Name</ion-text>
+          <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+        <ion-label *ngIf="role === '2'" position="floating"><ion-text style="color:#979797;">Name</ion-text>
+          <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+        <ion-input mode="md" class="input-custom" type="text" name="name" formControlName="name" required></ion-input>
+      </ion-item>
+      <div *ngIf="signupForm.get('name').invalid && (signupForm.get('name').dirty || signupForm.get('name').touched)">
+        <div *ngIf="signupForm.get('name').errors.required" class="text-danger">
+          Name is required!
+        </div>
+      </div>
+
+
+      <br>
+      <ion-item mode="md" class="item-custom">
+        <ion-label position="floating"><ion-text style="color:#979797;">Email Address</ion-text>
+          <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+        <ion-input mode="md" class="input-custom" type="email" name="email" formControlName="email" required></ion-input>
+      </ion-item>
+      <div *ngIf="signupForm.get('email').invalid && (signupForm.get('email').dirty || signupForm.get('email').touched)">
+        <div *ngIf="signupForm.get('email').errors.required" class="text-danger">
+          Email address is required!
+        </div>
+        <div *ngIf="signupForm.get('email').errors.email" class="text-danger">
+          Invalid email address!
+        </div>
+      </div>
+
+
+
+      <br>
+      <ion-item mode="md" class="item-custom">
+        <ion-label position="floating"><ion-text style="color:#979797;">PAN Number</ion-text><ion-text style="color:#EF2727;">*</ion-text></ion-label>
+          <div style="width:100%;display:flex;align-items: center;">
+            <ion-input mode="md" class="input-custom" type="text" name="pan_number" 
+            formControlName="pan_number" required maxlength="12"> </ion-input> 
+            <ion-buttons>
+              <ion-button color="primary" disabled  style="opacity: 1;">
+                <ion-icon slot="icon-only" name="share-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </div>
+      </ion-item>
+      <div *ngIf="signupForm.get('pan_number').invalid && (signupForm.get('pan_number').dirty || signupForm.get('pan_number').touched)">
+        <div *ngIf="signupForm.get('pan_number').errors.required" class="text-danger">
+          PAN Number is required!
+        </div>
+        <div *ngIf="signupForm.get('pan_number').errors.pattern" class="text-danger">
+          Invalid PAN Number format!
+        </div>
+      </div>
+
+
+
+
+      <div *ngIf="role === '1'">
+      <br>
+      <ion-item mode="md" class="item-custom">
+        <ion-label position="floating"><ion-text style="color:#979797;">MSME</ion-text></ion-label>
+        <ion-input mode="md" class="input-custom" type="text" name="msme" formControlName="msme" maxlength="15"></ion-input>
+      </ion-item>
+      <div><ion-text style="font-size: 10px;color:#979797;">Sample: AB12C1234567</ion-text></div>
+      <div *ngIf="signupForm.get('msme').invalid && (signupForm.get('msme').dirty || signupForm.get('msme').touched)">
+        <div *ngIf="signupForm.get('msme').errors.pattern" class="text-danger">
+          Invalid MSME Number format!
+        </div>
+      </div>
+      </div>
+
+
+
+
+      <br>
+      <div style="border: 1px solid #c2c2c2;border-radius: 10px; padding: 10px;">
+      <ion-item mode="md" class="item-custom" lines="none" style="--min-height: auto">
+        <ion-label><ion-text style="color:#979797;">Do you have the GST number?</ion-text>
+          <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+      </ion-item>
+      <ion-radio-group name="have_gst" formControlName="have_gst" class="ion-margin-bottom" mode="md" allowEmptySelection="false">
+        <div class="custom-radio" style="display: flex;">
+          <div style="margin-left: 20px; margin-right: 20%;">
+            <ion-label style="font-size: 14px;color: '#262525';display: flex; align-items: center;">Yes&nbsp;&nbsp;
+              <ion-radio value="yes" mode="md"></ion-radio></ion-label>
+          </div>
+          <div>
+            <ion-label style="font-size: 14px;color: '#262525';display: flex; align-items: center;">No&nbsp;&nbsp;
+              <ion-radio value="no" mode="md"></ion-radio></ion-label>             
+          </div>
+        </div>
+      </ion-radio-group>
+
+      <div *ngIf="signupForm.get('have_gst').value === 'yes'">
+      <br>
+      <ion-item mode="md" class="item-custom">
+        <ion-label position="floating"><ion-text style="color:#979797;">GST No</ion-text></ion-label>
+        <div style="width:100%;display:flex;align-items: center;">
+        <ion-input mode="md" class="input-custom" type="text" name="gst_number" 
+                   formControlName="gst_number" maxlength="16"></ion-input>
+
+        <input #gstFileInput type="file" accept=".pdf,.doc,.docx" 
+        style="display: none;"  (change)="onFileSelectedGST($event)">
+        <ion-buttons>
+          <ion-button color="primary" (click)="gstFileInput.click()">
+            <ion-icon slot="icon-only" name="share-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        </div>
+      </ion-item>
+      <div><ion-text style="font-size: 10px;color:#979797;">Sample: 04AABCU9603R1ZV</ion-text></div>
+      <div *ngIf="signupForm.get('gst_number').invalid && (signupForm.get('gst_number').dirty || signupForm.get('gst_number').touched)">
+        <div *ngIf="signupForm.get('gst_number').errors.pattern" class="text-danger">
+          Invalid GST Number format!
+        </div>
+      </div>
+      </div>
+      <div *ngIf="signupForm.get('have_gst').value === 'no'">
+      <br>
+      <ion-item mode="md" class="item-custom" >
+        <ion-label position="floating"><ion-text style="color:#979797;">Upload GST declartion</ion-text></ion-label>
+        <div style="width:100%;display:flex;align-items: center;margin-bottom: 10px;">
+          <ion-input mode="md" class="input-custom" type="text" readonly="true"> </ion-input>             
+          <input #gstFileInput type="file" accept=".pdf,.doc,.docx" 
+          style="display: none;"  (change)="onFileSelectedGST($event)">
+          <ion-buttons>
+            <ion-button color="primary"  (click)="gstFileInput.click()">
+              <ion-icon slot="icon-only" name="share-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </ion-item>
+      </div>
+      <div *ngIf="fileNameGST" style="display: flex; align-items: center;"><ion-text color="primary" style="font-size: 10px;">Certificate File: {{fileNameGST}}</ion-text>
+        <ion-buttons>
+          <ion-button size="small" color="primary" (click)="removeFileGST()">
+            <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </div>
+      </div>
+
+
+
+    
+      <div>
+      <br>
+      <ion-item mode="md" class="item-custom" >
+        <ion-label position="floating"><ion-text style="color:#979797;">RERA No</ion-text>
+          <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+        <div style="width:100%;display:flex;align-items: center;">
+          <ion-input mode="md" class="input-custom" type="text"  name="rera_no" formControlName="rera_no" required> </ion-input> 
+          
+          <input #reraFileInput type="file" accept=".pdf,.doc,.docx" formControlName="rera_certificate"  
+          style="display: none;" (change)="onFileSelectedRERA($event)">
+          <ion-buttons disabled>
+            <ion-button color="primary" (click)="reraFileInput.click()">
+              <ion-icon slot="icon-only" name="share-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </ion-item>
+      <div><ion-text style="font-size: 10px;color:#979797;">Sample: PRM/KA/RERA/1251/446/AG/171201/001619</ion-text></div>
+      <div *ngIf="signupForm.get('rera_no').invalid && (signupForm.get('rera_no').dirty || signupForm.get('rera_no').touched)">
+        <div *ngIf="signupForm.get('rera_no').errors.pattern" class="text-danger">
+          Invalid RERA Number format!
+        </div>
+        <div *ngIf="signupForm.get('rera_no').errors.required" class="text-danger">
+          Rera Number is required!
+        </div>
+      </div>
+      </div>
+
+
+      <!-- <br>
+      <ion-item mode="md" class="item-custom">
+        <ion-label><ion-text style="color:#979797;">Upload your RERA declartion here</ion-text></ion-label>
+            <ion-buttons slot="end">
+              <ion-button color="primary" (click)="selectRERAdeclartion()">
+                <ion-icon slot="icon-only" name="share-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+      </ion-item> -->
+
+
+
+
+
+      <br>
+      <ion-item mode="md" class="item-custom">
+        <ion-label *ngIf="role === '1'" position="floating"><ion-text style="color:#979797;">Contact No</ion-text>
+          <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+        <ion-label *ngIf="role === '2'" position="floating"><ion-text style="color:#979797;">Phone No</ion-text>
+          <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+        <ion-input mode="md" class="input-custom" type="tel" name="phone" formControlName="phone" required></ion-input>
+      </ion-item>
+      <div *ngIf="signupForm.get('phone').invalid && (signupForm.get('phone').dirty || signupForm.get('phone').touched)">
+        <div *ngIf="signupForm.get('phone').errors.required" class="text-danger">
+          Phone Number is required!
+        </div>
+        <div *ngIf="signupForm.get('phone').errors.invalidPhoneNumber" class="text-danger">
+          Invalid Phone number!
+        </div>
+        <div *ngIf="signupForm.get('phone').errors.invalidSpace" class="text-danger">
+          Phone number cannot contain spaces!
+        </div>
+      </div>
+
+
+      <div *ngIf="role === '1'">
+      <br>
+      <ion-item mode="md" class="item-custom">
+        <ion-label position="floating"><ion-text style="color:#979797;">Alternate Number</ion-text></ion-label>
+        <ion-input mode="md" class="input-custom" type="tel" name="alternate_number" formControlName="alternate_number"></ion-input>
+      </ion-item>
+      <div *ngIf="signupForm.get('alternate_number').invalid && (signupForm.get('alternate_number').dirty || signupForm.get('alternate_number').touched)">
+        <div *ngIf="signupForm.get('alternate_number').errors.invalidPhoneNumber" class="text-danger">
+          Invalid Phone number!
+        </div>
+        <div *ngIf="signupForm.get('alternate_number').errors.invalidSpace" class="text-danger">
+          Phone number cannot contain spaces!
+        </div>
+      </div>
+      </div>
+
+   
+
+   
+      <br>
+      <ion-item mode="md" class="item-custom">
+        <ion-label position="floating"><ion-text style="color:#979797;">City</ion-text>
+          <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+        <ion-input mode="md" class="input-custom" type="text" name="city" formControlName="city" (ionInput)="searchCity($event)" required></ion-input>
+      </ion-item>
+      <ion-list *ngIf="predictions.length > 0 && showSuggest">
+        <ion-item class="item-custom" button (click)="selectCity(prediction)" 
+        *ngFor="let prediction of predictions" style="--min-height: auto;">
+         <ion-label style="font-size: 14px;">{{ prediction.description }}</ion-label> 
+        </ion-item>
+      </ion-list>
+      <div *ngIf="signupForm.get('city').invalid && (signupForm.get('city').dirty || signupForm.get('city').touched)">
+        <div *ngIf="signupForm.get('city').errors.required" class="text-danger">
+          City name is required!
+        </div>
+      </div>
+   
+
+
+
+      <br>
+      <ion-item mode="md" class="item-custom">
+        <ion-label *ngIf="role === '1'" position="floating"><ion-text style="color:#979797;">Registered Address</ion-text>
+          <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+        <ion-label *ngIf="role === '2'" position="floating"><ion-text style="color:#979797;">Address</ion-text>
+          <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+        <ion-input mode="md" class="input-custom" type="text" name="address" formControlName="address" required></ion-input>
+      </ion-item>
+      <div *ngIf="signupForm.get('address').invalid && (signupForm.get('address').dirty || signupForm.get('address').touched)">
+        <div *ngIf="signupForm.get('address').errors.required" class="text-danger">
+          Address is required!
+        </div>
+      </div>
+
+
+      <div *ngIf="role === '1'">
+      <br>
+      <ion-item mode="md" class="item-custom">
+        <ion-label position="floating"><ion-text style="color:#979797;">Communication Address</ion-text></ion-label>
+        <ion-input mode="md" class="input-custom" type="text" name="communication_address" formControlName="communication_address"></ion-input>
+      </ion-item>
+      <!-- <div *ngIf="signupForm.get('communication_address').invalid && (signupForm.get('communication_address').dirty || signupForm.get('communication_address').touched)">
+        <div *ngIf="signupForm.get('communication_address').errors.required" class="text-danger">
+          Communication address is required!
+        </div>
+      </div> -->
+      </div>
+
+
+      <div *ngIf="role === '1'">
+      <br>
+      <ion-item mode="md" class="item-custom">
+        <ion-label position="floating"><ion-text style="color:#979797;">Pin Code</ion-text></ion-label>
+        <ion-input mode="md" class="input-custom" type="text" name="pincode" formControlName="pincode" maxlength="6"></ion-input>
+      </ion-item>
+      <div *ngIf="signupForm.get('pincode').invalid && (signupForm.get('pincode').dirty || signupForm.get('pincode').touched)">
+        <div *ngIf="signupForm.get('pincode').errors.pattern" class="text-danger">
+          Invalid Pin Code format!
+        </div>
+      </div>
+      </div>
+
+
+      <div *ngIf="role === '1'">
+      <br>
+      <ion-item button mode="md" class="item-custom" (click)="dateModalBirth()">
+        <ion-label><ion-text style="color:#979797;">Date of Birth</ion-text>&nbsp;&nbsp;</ion-label>
+        <ion-input mode="md" class="input-custom" readonly="true" type="text" name="dob" formControlName="dob"></ion-input> 
+        <div style="width:auto;display:flex;align-items: center;">
+          <ion-buttons>
+            <ion-button color="primary">
+              <ion-icon slot="icon-only" name="calendar-number-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>    
+      </ion-item>
+      <!-- <div *ngIf="signupForm.get('dob').invalid && (signupForm.get('dob').dirty || signupForm.get('dob').touched)">
+        <div *ngIf="signupForm.get('dob').errors.required" class="text-danger">
+          Date of Birth is required!
+        </div>
+      </div> -->
+      </div>
+
+
+      <div *ngIf="role === '1'">
+      <br>
+      <ion-item button mode="md" class="item-custom" (click)="dateModal()">
+        <ion-label><ion-text style="color:#979797;">Date of Incorporation</ion-text>&nbsp;&nbsp;</ion-label>
+        <ion-input mode="md" class="input-custom" readonly="true" type="text" name="date" formControlName="date"></ion-input> 
+        <div style="width:auto;display:flex;align-items: center;">
+          <ion-buttons>
+            <ion-button color="primary">
+              <ion-icon slot="icon-only" name="calendar-number-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>    
+      </ion-item>
+      </div>
+
+
+    <div *ngIf="role === '1'">
+    <br>
+    <ion-item mode="md" class="item-custom">
+        <ion-select placeholder="Select Region"  formControlName="region_name" name="region_name" required style="width:100%;">
+          <ion-select-option *ngFor="let std of stateData" [value]="std.id">{{std.name}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <div *ngIf="signupForm.get('region_name').invalid && (signupForm.get('region_name').dirty || signupForm.get('region_name').touched)">
+      <div *ngIf="signupForm.get('region_name').errors.required" class="text-danger">
+        Region selection is required!
+      </div>
+    </div>
+    </div>
+
+
+    <div *ngIf="role === '1'">
+    <br>
+    <ion-item mode="md" class="item-custom">
+      <ion-label position="floating"><ion-text style="color:#979797;">Vendor Id</ion-text>
+        <ion-text style="color:#EF2727;">*</ion-text></ion-label>
+      <ion-input mode="md" class="input-custom" type="text" formControlName="vendor_id" name="vendor_id" maxlength="20" required></ion-input>
+    </ion-item>
+    <div *ngIf="signupForm.get('vendor_id').invalid && (signupForm.get('vendor_id').dirty || signupForm.get('vendor_id').touched)">
+      <div *ngIf="signupForm.get('vendor_id').errors.required" class="text-danger">
+        Vendor Id is required!
+      </div>
+    </div>
+    </div>
+
+
+
+      <div *ngIf="role === '1'">
+      <br>
+      <ion-item mode="md" class="item-custom">
+        <ion-label position="floating"><ion-text style="color:#979797;">Name of Directors/Partner</ion-text></ion-label>
+        <ion-input mode="md" class="input-custom" type="text" name="partner_name" formControlName="partner_name"></ion-input>
+      </ion-item>
+      <!-- <div *ngIf="signupForm.get('partner_name').invalid && (signupForm.get('partner_name').dirty || signupForm.get('partner_name').touched)">
+        <div *ngIf="signupForm.get('partner_name').errors.required" class="text-danger">
+          Name of Directors/Partner is required!
+        </div>
+      </div> -->
+      </div>
+
+ 
+
+
+      <br>
+      <div class="ion-padding-top ion-padding-bottom">
+        <ion-button  type="submit" size="large" expand="block" style="--border-radius: 15px;">Sign up</ion-button>
+      </div>  
+    </form>
+ </div>
+
+
+</ion-content>

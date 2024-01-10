@@ -1,0 +1,81 @@
+#segmentTab3 {
+  width: 100%;
+  background: transparent;
+  margin-top: 12px;
+    ion-segment {
+      // --background: #ffffff !important;
+      // background: #ffffff !important;
+      background: transparent !important;
+      
+      border-radius: 0px !important;
+      border-top-left-radius: 8px !important;
+      border-top-right-radius: 8px !important;
+      padding-bottom: 10px;
+      width:70%;
+      display:flex;flex-flow: wrap;
+
+      ion-segment-button {
+        flex-basis:auto;
+        text-transform: capitalize;
+        letter-spacing: 0.5px;
+        --background: #DCE0E3;
+        --background-checked: var(--ion-color-primary);
+        --color-hover: var(--ion-color-primary);
+        --color-checked: #fff;
+        --color: #5B5B5B;
+        --border-radius: 12px;
+        --indicator-height: 0px;
+        --indicator-color: transparent !important;
+        --indicator-box-shadow: none !important;
+ 
+        min-height: 36px;
+        margin-inline: 5px;
+        --border-width: 0px;
+        --border-color: transparent;
+        ion-text{
+            font-weight: 300;
+        }        
+      }
+    }
+    ion-thumbnail{
+      height:2em;
+      width:1.8em;
+    }
+    ion-item{
+      ion-label{
+        h3{ line-height: 1.4; }
+      }
+    }
+
+
+  }
+  
+
+
+  ion-row {
+    .col-A {
+        font-size: 15px !important;
+        color: #333;
+    }
+
+    ion-label{
+        p{
+           font-size:12px;
+           font-weight:500;
+        }
+        h3{
+            font-size:14px;  font-weight:600;
+        }
+    }
+}
+
+
+
+
+#invoice_grid{
+  h3{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}

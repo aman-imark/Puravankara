@@ -1,0 +1,27 @@
+  <div style="min-height: 200px;position:relative;">
+    <div style="position: absolute;right: 0px;top: 0px;left: 0px; margin: 8px">
+      <ion-toolbar mode="md">
+        <ion-buttons slot="end">
+          <ion-button color="dark" (click)="dismiss()">
+            <ion-icon name="close-sharp" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-title>Select Date</ion-title>
+      </ion-toolbar>
+    </div>
+  
+   
+      <div class="ion-margin">
+        <div style="margin-top: 10px;">
+        <br>    <br>
+        <ion-datetime mode="md" presentation="date"
+          [(ngModel)]="selectedDateValue"
+          [max]="maxDate"
+        ></ion-datetime>
+        </div>
+    
+        <div class="ion-padding-horizontal ion-padding-bottom">
+          <ion-button type="button" style="--border-radius: 10px; text-transform: capitalize;" (click)="setDate()">Set Date</ion-button>
+        </div>
+      </div>
+  </div>

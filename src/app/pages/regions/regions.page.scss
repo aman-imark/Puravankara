@@ -1,0 +1,40 @@
+.region{ 
+    ion-item {
+      --border-radius: 8px;
+      --background: #E9E9E9;    
+      ion-label{
+        font-size: 14px;
+      }
+    }
+    div{
+      ion-label{
+        font-size: 14px;
+        color:#666666;        
+      }
+    }
+}
+
+
+.region-content{
+  ion-label{
+    p{
+      color: #333;
+      opacity: 0.8;
+      font-size:12px;
+      font-weight:500;
+    }
+    h6{
+      color: #333;
+      font-weight:500; 
+    }
+  }
+}
+
+
+.icon-custom{
+  border-radius: 6px;
+  color: #fff;
+  background: var(--ion-color-primary);
+  font-size: 15px;
+  padding: 4px;
+}

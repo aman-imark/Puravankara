@@ -1,0 +1,57 @@
+
+<ion-content [fullscreen]="true">
+
+  <ion-header class="ion-no-border" style="padding:10px 2px 5px;">
+    <ion-toolbar mode="md">
+      <ion-buttons slot="start">
+        <ion-button color="dark" (click)="dismiss()">
+          <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <div style="position: absolute; top: 45%;left: 50%;
+              -ms-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%);width: 100%;">
+     <div class="ion-text-center">
+        <div style="height: 300px;">
+          <img src="assets/otp-page.png" style="height: 100%;width: 100%;object-fit: cover;">
+        </div>
+     </div>
+
+     <div class="ion-padding">
+        <h1 class="ion-text-center">OTP Verification</h1>
+        <h6 style="opacity:0.9">Enter verification code sent on your Email Address or Phone Number.</h6>
+        <br>
+        <form [formGroup]="otpForm" (ngSubmit)="submitVerifyOTP()">
+          <ion-row class="ion-text-center" style="width:100%;">
+            <ion-col class="ion-no-margin ion-no-padding">
+             <ion-input mode="md" class="otp-input ion-no-margin ion-no-padding" type="tel" #otp1 required 
+                        maxLength="1" formControlName="otp1" name="otp1" (keyup)="otpController($event,otp2,'')"></ion-input>
+             <ion-input mode="md" class="otp-input ion-no-margin ion-no-padding" type="tel" #otp2 required 
+                        maxLength="1" formControlName="otp2" name="otp2" (keyup)="otpController($event,otp3,otp1)"></ion-input>             
+             <ion-input mode="md" class="otp-input ion-no-margin ion-no-padding" type="tel" #otp3 required 
+                        maxLength="1" formControlName="otp3" name="otp3" (keyup)="otpController($event,otp4,otp2)"></ion-input>
+             <ion-input mode="md" class="otp-input ion-no-margin ion-no-padding" type="tel" #otp4  required 
+                        maxLength="1" formControlName="otp4" name="otp4" (keyup)="otpController($event,'',otp3)"></ion-input>
+            </ion-col>
+            <ion-col size="12" class="ion-text-left ion-padding-horizontal">
+              <ion-label>
+                <ion-note  *ngIf="otpExpire == false">OTP will expire in: {{counter | formatTime}}</ion-note>
+                <ion-note  *ngIf="otpExpire == true" color="danger">OTP Expired!</ion-note>              
+              </ion-label>
+            </ion-col>
+          </ion-row>
+          <br>
+          <div class="ion-padding-top">
+            <ion-button type="submit" size="large" expand="block" style="--border-radius: 15px;">Verify & Proceed</ion-button>
+          </div>
+        </form>
+        <div class="ion-padding-top ion-text-center">
+          <ion-label (click)="resendCode()"><a href="javascript:void(0)">Resend Code?</a></ion-label>
+        </div>         
+     </div>
+  </div>
+  
+</ion-content>

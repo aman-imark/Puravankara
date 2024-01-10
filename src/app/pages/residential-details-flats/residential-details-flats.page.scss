@@ -1,0 +1,205 @@
+// ion-thumbnail{
+//     height:2em;
+//     width:2em;
+    
+//     // img {  padding: 12px; }
+// }
+
+.card-A{
+    ion-label{
+        p{
+            // color:#333;
+            font-weight: 600; 
+            font-size:13px;
+        }
+        h2{
+           font-weight:600; font-size: 20px !important;
+        }
+        h3{
+           font-weight: 600;
+        }
+    }
+}
+
+
+
+.div_dynm{
+    p{
+        font-weight: 600; 
+        font-size:13px; 
+    }
+}
+
+#main{
+  ion-thumbnail{
+      height:2em;
+      width:2em;
+      
+      // img {  padding: 12px; }
+  }
+}
+
+#plan {
+    ion-label{
+        p{
+            // color:#333;
+            font-weight: 600; 
+            font-size:13px;
+        }
+        h2{
+           font-weight:600; font-size: 20px !important;
+        }
+        h3{
+           font-weight: 600;
+        }
+    }
+
+    ion-segment {
+      --background: #ffffff !important;
+      background: #ffffff !important;
+      border-radius: 0px !important;
+      border-top-left-radius: 8px !important;
+      border-top-right-radius: 8px !important;
+      padding-bottom: 10px;
+      width:100%;
+      display:flex;flex-flow: wrap;
+
+      ion-segment-button {
+        flex-basis:auto;
+        text-transform: capitalize;
+        letter-spacing: 0.5px;
+        --background: #DCE0E3;
+        --background-checked: var(--ion-color-primary);
+        --color-hover: var(--ion-color-primary);
+        --color-checked: #fff;
+        --color: #5B5B5B;
+        --border-radius: 12px;
+        --indicator-height: 0px;
+        --indicator-color: transparent !important;
+        --indicator-box-shadow: none !important;
+ 
+        min-height: 36px;
+        margin-inline: 5px;
+        --border-width: 0px;
+        --border-color: transparent;
+        ion-text{
+            font-weight: 300;
+        }        
+      }
+  }
+}
+
+#gallery{
+    ion-label{
+        p{
+            // color:#333;
+            font-weight: 600; 
+            font-size:13px;
+        }
+        h2{
+           font-weight:600; font-size: 20px !important;
+        }
+        h3{
+           font-weight: 600;
+        }
+    }
+    .custom-col{
+        height:165px;
+        .img-wrapper {
+            height: 150px;
+            width: 100%;
+            background: #F6F6F6;
+            display: inline-flex;
+            border-radius: 10px;
+            overflow:hidden;
+            // img{
+            //     height: 100%;
+            //     width: 100%;
+            //     object-fit: contain;
+            //     background-color: #F6F6F6;
+            //     border-radius: 10px;
+            // }
+        }
+    }
+}
+
+
+#videos{
+    ion-label{
+        p{
+            // color:#333;
+            font-weight: 600; 
+            font-size:13px;
+        }
+        h2{
+           font-weight:600; font-size: 20px !important;
+        }
+        h3{
+           font-weight: 600;
+        }
+    }
+}
+
+
+#amenities {
+    ion-segment {
+      --background: #ffffff !important;
+      background: #ffffff !important;
+      border-radius: 0px !important;
+      border-top-left-radius: 8px !important;
+      border-top-right-radius: 8px !important;
+      padding-bottom: 10px;
+      width:70%;
+      display:flex;flex-flow: wrap;
+
+      ion-segment-button {
+        flex-basis:auto;
+        text-transform: capitalize;
+        letter-spacing: 0.5px;
+        --background: #DCE0E3;
+        --background-checked: var(--ion-color-primary);
+        --color-hover: var(--ion-color-primary);
+        --color-checked: #fff;
+        --color: #5B5B5B;
+        --border-radius: 12px;
+        --indicator-height: 0px;
+        --indicator-color: transparent !important;
+        --indicator-box-shadow: none !important;
+ 
+        min-height: 36px;
+        margin-inline: 5px;
+        --border-width: 0px;
+        --border-color: transparent;
+        ion-text{
+            font-weight: 300;
+        }        
+      }
+    }
+    ion-thumbnail{
+      height:2em;
+      width:1.8em;
+    }
+    ion-item{
+      ion-label{
+        h3{ line-height: 1.4; }
+      }
+    }
+
+    // ion-row ion-col ion-item {
+    //     .divA { height:26px; width:42px; }
+    //     img { height:100%; }
+    //     ion-text{
+    //         font-size:13px; display: block;
+    //     }
+    // }
+
+    // ion-label{
+    //     p{ font-weight:300; color:#333; }
+    //     h2{ font-weight:600; font-size:20px; }
+    //     h3{ font-weight: 600; }
+    // }
+  }
+  
+
+
+  
